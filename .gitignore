@@ -40,6 +40,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+.vscode/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -144,3 +145,6 @@ vite.config.ts.timestamp-*
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+allure-results/
+
