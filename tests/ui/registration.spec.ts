@@ -8,16 +8,16 @@ test.describe('User Registration Tests', () => {
   let loginPage: LoginPage;
   let homePage: HomePage;
 
-  test.beforeEach(async ({ pageWithCookieHandling }) => {
-    loginPage = new LoginPage(pageWithCookieHandling);
-    homePage = new HomePage(pageWithCookieHandling);
-    await pageWithCookieHandling.goto(BASE_URL);
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    await page.goto(BASE_URL);
   });
 
-  test('TC001: Should register a new user successfully', async ({ pageWithCookieHandling }) => {
+  test('TC001: Should register a new user successfully', async ({ page }) => {
     await test.step('Navigate to signup/login page', async () => {
       await homePage.navigateToSignupLogin();
-      await expect(pageWithCookieHandling).toHaveURL(/.*\/login/);
+      await expect(page).toHaveURL(/.*\/login/);
     });
 
     await test.step('Enter signup details', async () => {
@@ -25,7 +25,7 @@ test.describe('User Registration Tests', () => {
       await loginPage.signup(newUser.name, newUser.email);
 
       // Verify we're on account information page
-      await expect(pageWithCookieHandling).toHaveURL(/.*\/signup/);
+      await expect(page).toHaveURL(/.*\/signup/);
     });
 
     await test.step('Fill account information and create account', async () => {
@@ -33,11 +33,11 @@ test.describe('User Registration Tests', () => {
       await loginPage.fillSignupForm(newUser);
 
       // Verify account created successfully
-      await expect(pageWithCookieHandling.getByText('Account Created!')).toBeVisible();
+      await expect(page.getByText('Account Created!')).toBeVisible();
     });
 
     await test.step('Continue and verify user is logged in', async () => {
-      await pageWithCookieHandling.getByRole('link', { name: 'Continue' }).click();
+      await page.getByRole('link', { name: 'Continue' }).click();
 
       // Verify user is logged in (logout link should be visible)
       await expect(homePage.logoutLink).toBeVisible();
@@ -46,7 +46,7 @@ test.describe('User Registration Tests', () => {
   });
 
   test('TC002: Should show error when registering with existing email', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Navigate to signup/login page', async () => {
       await homePage.navigateToSignupLogin();
@@ -65,7 +65,7 @@ test.describe('User Registration Tests', () => {
   });
 
   test('TC003: Should handle cookie consent popup during registration', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Navigate to signup/login and verify cookie popup is handled', async () => {
       await homePage.navigateToSignupLogin();
@@ -81,7 +81,7 @@ test.describe('User Registration Tests', () => {
       await loginPage.signup(newUser.name, newUser.email);
 
       // Should proceed to account information page without issues
-      const currentUrl = pageWithCookieHandling.url();
+      const currentUrl = page.url();
       expect(currentUrl).toContain('signup');
     });
   });

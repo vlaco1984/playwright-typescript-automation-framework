@@ -13,18 +13,18 @@ test.describe('Login and Cart Management Tests', () => {
   let productPage: ProductPage;
   let validUser: any;
 
-  test.beforeEach(async ({ pageWithCookieHandling }) => {
-    loginPage = new LoginPage(pageWithCookieHandling);
-    homePage = new HomePage(pageWithCookieHandling);
-    cartPage = new CartPage(pageWithCookieHandling);
-    productPage = new ProductPage(pageWithCookieHandling);
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    cartPage = new CartPage(page);
+    productPage = new ProductPage(page);
     validUser = UserFactory.createValidUser();
 
-    await pageWithCookieHandling.goto(BASE_URL);
+    await page.goto(BASE_URL);
   });
 
   test('TC004: Should login successfully with valid credentials', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Navigate to login page', async () => {
       await homePage.navigateToSignupLogin();
@@ -36,7 +36,7 @@ test.describe('Login and Cart Management Tests', () => {
       await loginPage.login(validUser.email, validUser.password!);
 
       // Verify login success (checking if we're redirected or see logout link)
-      const signupLink = pageWithCookieHandling.getByRole('link', { name: /Signup \/ Login/ });
+      const signupLink = page.getByRole('link', { name: /Signup \/ Login/ });
       const logoutLink = homePage.logoutLink;
 
       // Either we see logout link (successful login) or we're still on login page (need to register first)
@@ -48,11 +48,11 @@ test.describe('Login and Cart Management Tests', () => {
   });
 
   test('TC005: Should add products to cart and verify cart contents', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Navigate to products page', async () => {
       await homePage.navigateToProducts();
-      await expect(pageWithCookieHandling).toHaveURL(/.*\/products/);
+      await expect(page).toHaveURL(/.*\/products/);
     });
 
     await test.step('Add first product to cart', async () => {
@@ -70,15 +70,15 @@ test.describe('Login and Cart Management Tests', () => {
       await productPage.continueShopping();
 
       // Navigate back to products and add another product
-      await pageWithCookieHandling.goto('/products');
-      await pageWithCookieHandling.locator('.productinfo').nth(1).locator('.add-to-cart').click();
+      await page.goto('/products');
+      await page.locator('.productinfo').nth(1).locator('.add-to-cart').click();
 
       // View cart
-      await pageWithCookieHandling.getByRole('link', { name: 'View Cart' }).click();
+      await page.getByRole('link', { name: 'View Cart' }).click();
     });
 
     await test.step('Verify cart contents', async () => {
-      await expect(pageWithCookieHandling).toHaveURL(/.*\/view_cart/);
+      await expect(page).toHaveURL(/.*\/view_cart/);
 
       // Verify at least one item is in cart
       const itemCount = await cartPage.getCartItemsCount();
@@ -90,7 +90,7 @@ test.describe('Login and Cart Management Tests', () => {
     });
   });
 
-  test('TC006: Should update product quantity in cart', async ({ pageWithCookieHandling }) => {
+  test('TC006: Should update product quantity in cart', async ({ page }) => {
     await test.step('Add a product to cart first', async () => {
       await homePage.navigateToProducts();
       await homePage.viewFirstProduct();
@@ -107,11 +107,11 @@ test.describe('Login and Cart Management Tests', () => {
     // as the website might not have direct quantity edit functionality
   });
 
-  test('TC007: Should remove products from cart', async ({ pageWithCookieHandling }) => {
+  test('TC007: Should remove products from cart', async ({ page }) => {
     await test.step('Add products to cart', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
       await homePage.navigateToCart();
     });
 
@@ -122,7 +122,7 @@ test.describe('Login and Cart Management Tests', () => {
         await cartPage.removeProduct(0);
 
         // Wait for removal to complete
-        await pageWithCookieHandling.waitForTimeout(2000);
+        await page.waitForTimeout(2000);
 
         const finalCount = await cartPage.getCartItemsCount();
         expect(finalCount).toBeLessThan(initialCount);
@@ -130,11 +130,11 @@ test.describe('Login and Cart Management Tests', () => {
     });
   });
 
-  test('TC008: Should verify cart persistence after login', async ({ pageWithCookieHandling }) => {
+  test('TC008: Should verify cart persistence after login', async ({ page }) => {
     await test.step('Add products to cart before login', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
     });
 
     await test.step('Login and verify cart persists', async () => {

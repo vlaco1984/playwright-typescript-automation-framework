@@ -13,23 +13,23 @@ test.describe('Purchase Flow Tests', () => {
   let checkoutPage: CheckoutPage;
   let validUser: any;
 
-  test.beforeEach(async ({ pageWithCookieHandling }) => {
-    loginPage = new LoginPage(pageWithCookieHandling);
-    homePage = new HomePage(pageWithCookieHandling);
-    cartPage = new CartPage(pageWithCookieHandling);
-    checkoutPage = new CheckoutPage(pageWithCookieHandling);
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    cartPage = new CartPage(page);
+    checkoutPage = new CheckoutPage(page);
     validUser = UserFactory.createRandomUser();
 
-    await pageWithCookieHandling.goto(BASE_URL);
+    await page.goto(BASE_URL);
   });
 
   test('TC009: Should complete purchase flow - Register during checkout', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Add products to cart', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
       await homePage.navigateToCart();
     });
 
@@ -38,7 +38,7 @@ test.describe('Purchase Flow Tests', () => {
 
       // Should be prompted to register/login
       await expect(
-        pageWithCookieHandling.getByRole('link', { name: 'Register / Login' }),
+        page.getByRole('link', { name: 'Register / Login' }),
       ).toBeVisible();
     });
 
@@ -48,8 +48,8 @@ test.describe('Purchase Flow Tests', () => {
       await loginPage.fillSignupForm(validUser);
 
       // Verify account created
-      await expect(pageWithCookieHandling.getByText('Account Created!')).toBeVisible();
-      await pageWithCookieHandling.getByRole('link', { name: 'Continue' }).click();
+      await expect(page.getByText('Account Created!')).toBeVisible();
+      await page.getByRole('link', { name: 'Continue' }).click();
     });
 
     await test.step('Complete checkout process', async () => {
@@ -77,19 +77,19 @@ test.describe('Purchase Flow Tests', () => {
   });
 
   test('TC010: Should complete purchase flow - Login before checkout', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Register user first', async () => {
       await homePage.navigateToSignupLogin();
       await loginPage.signup(validUser.name, validUser.email);
       await loginPage.fillSignupForm(validUser);
-      await pageWithCookieHandling.getByRole('link', { name: 'Continue' }).click();
+      await page.getByRole('link', { name: 'Continue' }).click();
     });
 
     await test.step('Add products to cart', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
       await homePage.navigateToCart();
     });
 
@@ -97,7 +97,7 @@ test.describe('Purchase Flow Tests', () => {
       await cartPage.proceedToCheckout();
 
       // Should proceed directly to checkout since user is logged in
-      const currentUrl = pageWithCookieHandling.url();
+      const currentUrl = page.url();
       expect(currentUrl).toContain('checkout');
 
       // Complete the order
@@ -113,18 +113,18 @@ test.describe('Purchase Flow Tests', () => {
     });
   });
 
-  test('TC011: Should verify address details in checkout', async ({ pageWithCookieHandling }) => {
+  test('TC011: Should verify address details in checkout', async ({ page }) => {
     await test.step('Register user with specific address', async () => {
       await homePage.navigateToSignupLogin();
       await loginPage.signup(validUser.name, validUser.email);
       await loginPage.fillSignupForm(validUser);
-      await pageWithCookieHandling.getByRole('link', { name: 'Continue' }).click();
+      await page.getByRole('link', { name: 'Continue' }).click();
     });
 
     await test.step('Add product and proceed to checkout', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
       await homePage.navigateToCart();
       await cartPage.proceedToCheckout();
     });
@@ -139,19 +139,19 @@ test.describe('Purchase Flow Tests', () => {
   });
 
   test('TC012: Should handle order confirmation and invoice download', async ({
-    pageWithCookieHandling,
+    page,
   }) => {
     await test.step('Complete a purchase', async () => {
       // Register user
       await homePage.navigateToSignupLogin();
       await loginPage.signup(validUser.name, validUser.email);
       await loginPage.fillSignupForm(validUser);
-      await pageWithCookieHandling.getByRole('link', { name: 'Continue' }).click();
+      await page.getByRole('link', { name: 'Continue' }).click();
 
       // Add product and checkout
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
-      await pageWithCookieHandling.getByRole('button', { name: 'Continue Shopping' }).click();
+      await page.getByRole('button', { name: 'Continue Shopping' }).click();
       await homePage.navigateToCart();
       await cartPage.proceedToCheckout();
 
@@ -180,7 +180,7 @@ test.describe('Purchase Flow Tests', () => {
         await checkoutPage.continueAfterOrder();
 
         // Should be redirected to home page or account page
-        await expect(pageWithCookieHandling).toHaveURL(/.*\/(home|account)?/);
+        await expect(page).toHaveURL(/.*\/(home|account)?/);
       }
     });
   });
