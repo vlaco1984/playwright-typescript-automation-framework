@@ -155,6 +155,7 @@ test-results.json
 !README.md
 !CONTRIBUTING.md
 !LICENSE.md
+!tests/fixtures/FIXTURE_USAGE.md
 
 # PowerShell scripts
 *.ps1
