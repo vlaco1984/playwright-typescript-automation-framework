@@ -24,7 +24,7 @@ export class CartPage {
     this.cartProductTotals = page.locator('.cart_total_price');
     this.quantityButtons = page.locator('.cart_quantity .disabled');
     this.removeButtons = page.locator('.cart_quantity_delete');
-    this.proceedToCheckoutButton = page.getByRole('link', { name: 'Proceed To Checkout' });
+    this.proceedToCheckoutButton = page.locator('.check_out');
     this.registerLoginLink = page.getByRole('link', { name: 'Register / Login' });
     this.subscriptionInput = page.locator('#susbscribe_email');
     this.subscriptionButton = page.locator('#subscribe');
@@ -98,8 +98,6 @@ export class CartPage {
   }
 
   async proceedToCheckout() {
-    // Wait for any overlay to disappear first
-    await this.page.locator('.fc-consent-root').waitFor({ state: 'detached', timeout: 3000 }).catch(() => {});
     await this.proceedToCheckoutButton.click();
   }
 
