@@ -45,9 +45,7 @@ test.describe('User Registration Tests', () => {
     });
   });
 
-  test('TC002: Should show error when registering with existing email', async ({
-    page,
-  }) => {
+  test('TC002: Should show error when registering with existing email', async ({ page }) => {
     await test.step('Navigate to signup/login page', async () => {
       await homePage.navigateToSignupLogin();
     });
@@ -64,9 +62,7 @@ test.describe('User Registration Tests', () => {
     });
   });
 
-  test('TC003: Should handle cookie consent popup during registration', async ({
-    page,
-  }) => {
+  test('TC003: Should handle cookie consent popup during registration', async ({ page }) => {
     await test.step('Navigate to signup/login and verify cookie popup is handled', async () => {
       await homePage.navigateToSignupLogin();
 

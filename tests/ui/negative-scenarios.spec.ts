@@ -21,9 +21,7 @@ test.describe('Negative Scenario Tests', () => {
     await page.goto(BASE_URL);
   });
 
-  test('TC013: Should reject login with invalid email format', async ({
-    page,
-  }) => {
+  test('TC013: Should reject login with invalid email format', async ({ page }) => {
     await test.step('Navigate to login page', async () => {
       await homePage.navigateToSignupLogin();
     });
@@ -65,9 +63,7 @@ test.describe('Negative Scenario Tests', () => {
     });
   });
 
-  test('TC016: Should handle SQL injection attempts in login', async ({
-    page,
-  }) => {
+  test('TC016: Should handle SQL injection attempts in login', async ({ page }) => {
     await test.step('Navigate to login page', async () => {
       await homePage.navigateToSignupLogin();
     });

@@ -23,9 +23,7 @@ test.describe('Purchase Flow Tests', () => {
     await page.goto(BASE_URL);
   });
 
-  test('TC009: Should complete purchase flow - Register during checkout', async ({
-    page,
-  }) => {
+  test('TC009: Should complete purchase flow - Register during checkout', async ({ page }) => {
     await test.step('Add products to cart', async () => {
       await homePage.navigateToProducts();
       await homePage.addFirstProductToCart();
@@ -37,9 +35,7 @@ test.describe('Purchase Flow Tests', () => {
       await cartPage.proceedToCheckout();
 
       // Should be prompted to register/login
-      await expect(
-        page.getByRole('link', { name: 'Register / Login' }),
-      ).toBeVisible();
+      await expect(page.getByRole('link', { name: 'Register / Login' })).toBeVisible();
     });
 
     await test.step('Register new user', async () => {
@@ -76,9 +72,7 @@ test.describe('Purchase Flow Tests', () => {
     });
   });
 
-  test('TC010: Should complete purchase flow - Login before checkout', async ({
-    page,
-  }) => {
+  test('TC010: Should complete purchase flow - Login before checkout', async ({ page }) => {
     await test.step('Register user first', async () => {
       await homePage.navigateToSignupLogin();
       await loginPage.signup(validUser.name, validUser.email);
@@ -138,9 +132,7 @@ test.describe('Purchase Flow Tests', () => {
     });
   });
 
-  test('TC012: Should handle order confirmation and invoice download', async ({
-    page,
-  }) => {
+  test('TC012: Should handle order confirmation and invoice download', async ({ page }) => {
     await test.step('Complete a purchase', async () => {
       // Register user
       await homePage.navigateToSignupLogin();

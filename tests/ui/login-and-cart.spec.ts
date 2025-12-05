@@ -23,9 +23,7 @@ test.describe('Login and Cart Management Tests', () => {
     await page.goto(BASE_URL);
   });
 
-  test('TC004: Should login successfully with valid credentials', async ({
-    page,
-  }) => {
+  test('TC004: Should login successfully with valid credentials', async ({ page }) => {
     await test.step('Navigate to login page', async () => {
       await homePage.navigateToSignupLogin();
     });
@@ -47,9 +45,7 @@ test.describe('Login and Cart Management Tests', () => {
     });
   });
 
-  test('TC005: Should add products to cart and verify cart contents', async ({
-    page,
-  }) => {
+  test('TC005: Should add products to cart and verify cart contents', async ({ page }) => {
     await test.step('Navigate to products page', async () => {
       await homePage.navigateToProducts();
       await expect(page).toHaveURL(/.*\/products/);
