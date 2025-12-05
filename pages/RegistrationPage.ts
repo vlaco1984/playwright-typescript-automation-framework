@@ -1,0 +1,383 @@
+/**
+ * RegistrationPage - Page Object Model
+ * Encapsulates all interactions with the Automation Exercise registration page
+ * Implements POM best practices: locators, navigation, and interaction methods
+ */
+
+import { Page, Locator } from '@playwright/test';
+import { UserDetails } from '../utils/UserFactory';
+
+export class RegistrationPage {
+  readonly page: Page;
+
+  // Navigation elements
+  readonly signupLoginLink: Locator;
+
+  // Login/Signup form
+  readonly signupNameInput: Locator;
+  readonly signupEmailInput: Locator;
+  readonly signupButton: Locator;
+
+  // Registration form - Account Information
+  readonly titleMrRadio: Locator;
+  readonly titleMrsRadio: Locator;
+  readonly nameInput: Locator;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly dayDropdown: Locator;
+  readonly monthDropdown: Locator;
+  readonly yearDropdown: Locator;
+  readonly newsletterCheckbox: Locator;
+  readonly specialOffersCheckbox: Locator;
+
+  // Registration form - Address Information
+  readonly firstNameInput: Locator;
+  readonly lastNameInput: Locator;
+  readonly companyInput: Locator;
+  readonly address1Input: Locator;
+  readonly address2Input: Locator;
+  readonly countryDropdown: Locator;
+  readonly stateInput: Locator;
+  readonly cityInput: Locator;
+  readonly zipcodeInput: Locator;
+  readonly mobileNumberInput: Locator;
+
+  // Buttons
+  readonly createAccountButton: Locator;
+
+  // Success message
+  readonly accountCreatedHeading: Locator;
+  readonly successContinueButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+
+    // Navigation elements
+    this.signupLoginLink = page.locator('a[href="/login"]').or(
+      page.getByRole('link', { name: /Signup \/ Login/i })
+    );
+
+    // Login/Signup form selectors
+    this.signupNameInput = page.locator('input[data-qa="signup-name"]').or(
+      page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Name')
+    );
+    this.signupEmailInput = page.locator('input[data-qa="signup-email"]').or(
+      page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address')
+    );
+    this.signupButton = page.locator('button[data-qa="signup-button"]').or(
+      page.getByRole('button', { name: /^Signup$/i })
+    );
+
+    // Registration form - Account Information
+    this.titleMrRadio = page.locator('input[id="id_gender1"]').or(
+      page.locator('input[value="Mr"]').first()
+    );
+    this.titleMrsRadio = page.locator('input[id="id_gender2"]').or(
+      page.locator('input[value="Mrs"]').first()
+    );
+    this.nameInput = page.locator('input[data-qa="name"]').or(
+      page.locator('input[name="name"]').first()
+    );
+    this.emailInput = page.locator('input[data-qa="email"]').or(
+      page.locator('input[name="email"][disabled]')
+    );
+    this.passwordInput = page.locator('input[data-qa="password"]').or(
+      page.locator('input[type="password"]').first()
+    );
+    this.dayDropdown = page.locator('select[data-qa="days"]').or(
+      page.locator('select').nth(0)
+    );
+    this.monthDropdown = page.locator('select[data-qa="months"]').or(
+      page.locator('select').nth(1)
+    );
+    this.yearDropdown = page.locator('select[data-qa="years"]').or(
+      page.locator('select').nth(2)
+    );
+    this.newsletterCheckbox = page.locator('input[id="newsletter"]').or(
+      page.locator('input[name="newsletter"]')
+    );
+    this.specialOffersCheckbox = page.locator('input[id="optin"]').or(
+      page.locator('input[name="optin"]')
+    );
+
+    // Registration form - Address Information
+    this.firstNameInput = page.locator('input[data-qa="first_name"]').or(
+      page.locator('input[placeholder="First name *"]')
+    );
+    this.lastNameInput = page.locator('input[data-qa="last_name"]').or(
+      page.locator('input[placeholder="Last name *"]')
+    );
+    this.companyInput = page.locator('input[data-qa="company"]').or(
+      page.locator('input[placeholder="Company"]')
+    );
+    this.address1Input = page.locator('input[data-qa="address"]').or(
+      page.locator('textarea[placeholder*="Street address"]').or(
+        page.locator('input[name="address1"]')
+      )
+    );
+    this.address2Input = page.locator('input[data-qa="address2"]').or(
+      page.locator('input[placeholder="Address 2"]')
+    );
+    this.countryDropdown = page.locator('select[data-qa="country"]').or(
+      page.locator('select[name="country"]')
+    );
+    this.stateInput = page.locator('input[data-qa="state"]').or(
+      page.locator('input[placeholder="State *"]')
+    );
+    this.cityInput = page.locator('input[data-qa="city"]').or(
+      page.locator('input[placeholder*="City"]')
+    );
+    this.zipcodeInput = page.locator('input[data-qa="zipcode"]').or(
+      page.locator('input[placeholder="Zipcode *"]')
+    );
+    this.mobileNumberInput = page.locator('input[data-qa="mobile_number"]').or(
+      page.locator('input[placeholder="Mobile Number *"]')
+    );
+
+    // Action buttons
+    this.createAccountButton = page.locator('button[data-qa="create-account"]').or(
+      page.getByRole('button', { name: /Create Account/i })
+    );
+
+    // Success message
+    this.accountCreatedHeading = page.locator('h2:has-text("Account Created!")').or(
+      page.getByRole('heading', { name: /Account Created/i })
+    );
+    this.successContinueButton = page.locator('a[data-qa="continue-button"]').or(
+      page.getByRole('link', { name: /Continue/i })
+    );
+  }
+
+  /**
+   * Navigate to the login/signup page
+   * Includes retry logic for network errors
+   */
+  async goto(): Promise<void> {
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    while (attempts < maxAttempts) {
+      try {
+        await this.page.goto('/login', { waitUntil: 'domcontentloaded', timeout: 10000 });
+        break; // Success
+      } catch (error: any) {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          throw error; // Give up after max attempts
+        }
+        // Wait before retrying
+        await new Promise(r => setTimeout(r, 500 * attempts));
+      }
+    }
+  }
+
+  /**
+   * Navigate to signup form (assumes we're on login page)
+   */
+  async navigateToSignup(): Promise<void> {
+    await this.goto();
+  }
+
+  /**
+   * Perform initial signup (name and email only)
+   * This redirects to the full registration form
+   * @param name User's full name
+   * @param email User's email address
+   */
+  async performInitialSignup(name: string, email: string): Promise<void> {
+    await this.signupNameInput.fill(name);
+    await this.signupEmailInput.fill(email);
+
+    // Wait for Signup button to be clickable
+    await this.signupButton.waitFor({ state: 'visible', timeout: 10000 });
+
+    // Click with force to bypass any modal interception
+    // The FunnyConsent modal might block the click, so we use force: true
+    await this.signupButton.click({ force: true, timeout: 10000 });
+
+    // Wait for page to load after form submission
+    await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+    
+    // Wait a bit for page to settle
+    await this.page.waitForTimeout(800);
+
+    // Log current URL for debugging
+    const currentUrl = this.page.url();
+    console.log('Page URL after signup click:', currentUrl);
+    
+    // Wait for the registration form to load - look for password field
+    try {
+      await this.page.waitForSelector('input[data-qa="password"]', { state: 'visible', timeout: 10000 });
+    } catch {
+      // Fallback: wait for any password input field
+      console.log('Password field with data-qa not found, trying fallback...');
+      await this.page.waitForSelector('input[type="password"]', { state: 'visible', timeout: 10000 });
+    }
+  }
+
+  /**
+   * Close cookie consent modal if it appears
+   * The modal can reappear on multiple pages, so we use force: true
+   * to ensure clicks work even if the modal is blocking
+   */
+  private async closeConsentModalIfPresent(): Promise<void> {
+    try {
+      const modal = this.page.locator('.fc-consent-root');
+      const modalVisible = await modal.isVisible({ timeout: 1000 }).catch(() => false);
+
+      if (modalVisible) {
+        const closeBtn = this.page.locator('.fc-close-button');
+        const closeBtnVisible = await closeBtn.isVisible({ timeout: 500 }).catch(() => false);
+
+        if (closeBtnVisible) {
+          // Use force: true to bypass any overlay issues
+          await closeBtn.click({ force: true, timeout: 2000 });
+          // Wait for modal to disappear
+          await modal.waitFor({ state: 'hidden', timeout: 1000 }).catch(() => {});
+        }
+      }
+    } catch (e) {
+      // Modal handling failed, continue anyway
+    }
+  }
+
+  /**
+   * Fill the complete registration form
+   * @param userDetails User details to fill in the form
+   */
+  async fillRegistrationForm(userDetails: UserDetails): Promise<void> {
+    // Wait for page to be fully ready
+    await this.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+
+    // Close consent modal if present before filling form
+    await this.closeConsentModalIfPresent();
+
+    // Wait for title radio button to be visible and stable
+    await this.titleMrRadio.waitFor({ state: 'visible', timeout: 5000 });
+
+    // Select title using force: true to bypass modal overlays
+    if (userDetails.title === 'Mr.') {
+      await this.titleMrRadio.click({ force: true, timeout: 5000 });
+    } else {
+      await this.titleMrsRadio.click({ force: true, timeout: 5000 });
+    }
+
+    // Fill account information
+    await this.nameInput.fill(userDetails.name);
+    // Email is pre-filled and disabled, so we skip it
+    await this.passwordInput.fill(userDetails.password);
+
+    // Set date of birth
+    await this.dayDropdown.selectOption(userDetails.dayOfBirth);
+    await this.monthDropdown.selectOption(userDetails.monthOfBirth);
+    await this.yearDropdown.selectOption(userDetails.yearOfBirth);
+
+    // Set checkboxes using click with force: true instead of check() 
+    // because check() validates state change which may fail with force clicks
+    if (userDetails.newsletter) {
+      const isChecked = await this.newsletterCheckbox.isChecked().catch(() => false);
+      if (!isChecked) {
+        await this.newsletterCheckbox.click({ force: true, timeout: 5000 });
+      }
+    }
+    if (userDetails.specialOffers) {
+      const isChecked = await this.specialOffersCheckbox.isChecked().catch(() => false);
+      if (!isChecked) {
+        await this.specialOffersCheckbox.click({ force: true, timeout: 5000 });
+      }
+    }
+
+    // Fill address information
+    await this.firstNameInput.fill(userDetails.firstName);
+    await this.lastNameInput.fill(userDetails.lastName);
+
+    if (userDetails.company) {
+      await this.companyInput.fill(userDetails.company);
+    }
+
+    await this.address1Input.fill(userDetails.address1);
+
+    if (userDetails.address2) {
+      await this.address2Input.fill(userDetails.address2);
+    }
+
+    await this.countryDropdown.selectOption(userDetails.country);
+    await this.stateInput.fill(userDetails.state);
+    await this.cityInput.fill(userDetails.city);
+    await this.zipcodeInput.fill(userDetails.zipcode);
+    await this.mobileNumberInput.fill(userDetails.mobileNumber);
+  }
+
+  /**
+   * Complete the entire registration process from signup page to account creation
+   * @param userDetails User details to register
+   */
+  async completeRegistration(userDetails: UserDetails): Promise<void> {
+    // Start signup with name and email
+    await this.performInitialSignup(userDetails.name, userDetails.email);
+
+    // Fill the registration form
+    await this.fillRegistrationForm(userDetails);
+
+    // Submit the form
+    await this.createAccountButton.click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /**
+   * Submit the registration form
+   */
+  async submitRegistration(): Promise<void> {
+    // Close any consent modal that might be blocking
+    await this.closeConsentModalIfPresent();
+
+    // Click the Create Account button with force to bypass modal overlays
+    await this.createAccountButton.click({ force: true });
+
+    // Wait for page to load after submission
+    await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+  }
+
+  /**
+   * Verify that account was created successfully
+   * @returns True if success message is visible
+   */
+  async isAccountCreatedMessageVisible(): Promise<boolean> {
+    try {
+      await this.accountCreatedHeading.waitFor({ state: 'visible', timeout: 5000 });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Get the account created success message text
+   */
+  async getSuccessMessageText(): Promise<string | null> {
+    return await this.accountCreatedHeading.textContent();
+  }
+
+  /**
+   * Click the continue button after successful registration
+   */
+  async clickContinueAfterSuccess(): Promise<void> {
+    await this.successContinueButton.click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /**
+   * Get current page URL
+   */
+  async getCurrentUrl(): Promise<string> {
+    return this.page.url();
+  }
+
+  /**
+   * Check if we're on the account creation success page
+   */
+  async isOnSuccessPage(): Promise<boolean> {
+    const url = await this.getCurrentUrl();
+    return url.includes('/account_created') || url.includes('account-created');
+  }
+}
