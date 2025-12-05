@@ -3,7 +3,7 @@ import { LoginPage } from '../../pages/LoginPage';
 import { HomePage } from '../../pages/HomePage';
 import { CartPage } from '../../pages/CartPage';
 import { CheckoutPage } from '../../pages/CheckoutPage';
-import { UserFactory } from '../../utils/UserFactory';
+import { UserFactory, User } from '../../utils/UserFactory';
 import { BASE_URL } from '../../config/constants';
 
 test.describe('Purchase Flow Tests', () => {
@@ -11,7 +11,7 @@ test.describe('Purchase Flow Tests', () => {
   let homePage: HomePage;
   let cartPage: CartPage;
   let checkoutPage: CheckoutPage;
-  let validUser: any;
+  let validUser: User;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);

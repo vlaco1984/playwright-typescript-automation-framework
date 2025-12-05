@@ -103,7 +103,7 @@ test.describe('Negative Scenario Tests', () => {
       // Should either sanitize the input or reject it
       // Verify no alert popup appears
       const alertPresent = await page.evaluate(() => {
-        return typeof (globalThis as any).alert !== 'undefined';
+        return typeof window.alert !== 'undefined';
       });
 
       expect(alertPresent).toBeTruthy(); // Alert function should exist but not be called
