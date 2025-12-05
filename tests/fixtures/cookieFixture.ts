@@ -16,7 +16,6 @@ export async function handleCookiePopup(page: Page): Promise<void> {
       await consentButton.click({ force: true });
       // Wait for the dialog to disappear
       await page.locator('.fc-consent-root').waitFor({ state: 'detached', timeout: 3000 }).catch(() => {});
-      console.log('Cookie popup dismissed');
     }
   } catch (error) {
     console.log('Cookie popup not found or already dismissed');
