@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:setup": "npx playwright test --project=setup",
+    "test:e2e": "npx playwright test --project=e2e",
+    "test:api": "npx playwright test --project=api",
     "lint": "npx eslint .",
     "format": "npx prettier --check .",
     "allure:serve": "npx allure serve allure-results",

@@ -150,6 +150,10 @@ allure-results/
 **/mcp.json
 test-results.json
 
+# Auth and storage state files (generated per environment)
+.auth/
+!.auth/README.md
+
 # Documentation and notes
 *.md
 !README.md

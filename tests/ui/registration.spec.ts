@@ -2,7 +2,12 @@
  * E2E Registration Test
  * Pure UI/E2E testing for user registration on Automation Exercise
  * Uses: RegistrationPage POM, UserFactory, and Modal Fixture
- * Note: Modal fixture automatically handles cookie consent modals
+ * 
+ * Cookie Consent Handling:
+ * - Storage state (.auth/cookie-consent-state.json) is loaded automatically
+ * - This prevents the FunnyConsent modal from appearing in tests
+ * - If modal still appears, run: npm run test:setup
+ * - Modal fixture provides fallback handling as extra safety
  */
 
 import { test, expect } from '../fixtures/modalFixture';
@@ -168,7 +173,8 @@ test.describe('User Registration E2E Tests', () => {
     }
   });
 
-  test('Register multiple users in batch', async ({ pageWithModalHandling, modalHandler }) => {
+  test('Register multiple users in batch', async ({ browser }) => {
+    console.log(await browser.contexts()[0].storageState());
     try {
       const users = UserFactory.createBatch(2);
 

@@ -40,6 +40,15 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project - run once to capture cookie consent state
+    {
+      name: 'setup',
+      testDir: './tests/auth',
+      testMatch: '**/cookieConsent.setup.ts',
+      use: {
+        baseURL: 'https://automationexercise.com',
+      },
+    },
     {
       name: 'api',
       testDir: './tests/api',
@@ -53,11 +62,14 @@ export default defineConfig({
       testDir: './tests/ui',
       timeout: 90000,
       fullyParallel: false,
+      dependencies: ['setup'], // Run setup first
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'https://automationexercise.com',
         actionTimeout: 15000,
         navigationTimeout: 30000,
+        // Use saved storage state to avoid cookie consent modal
+        storageState: '.auth/cookie-consent-state.json',
       },
     },
   ],
