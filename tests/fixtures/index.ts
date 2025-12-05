@@ -1,4 +1,4 @@
-import { test as base, Page } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { handleCookiePopup } from './cookieFixture';
 
 export const test = base.extend<{}>({

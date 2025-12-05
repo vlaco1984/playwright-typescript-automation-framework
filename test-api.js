@@ -11,26 +11,26 @@ const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length': searchData.length
-  }
+    'Content-Length': searchData.length,
+  },
 };
 
 console.log('Testing Search API...');
 const req = https.request(options, (res) => {
   console.log(`Status Code: ${res.statusCode}`);
   console.log(`Headers: ${JSON.stringify(res.headers)}`);
-  
+
   let data = '';
   res.on('data', (chunk) => {
     data += chunk;
   });
-  
+
   res.on('end', () => {
     console.log('Response Body:', data);
     try {
       const json = JSON.parse(data);
       console.log('Parsed JSON:', JSON.stringify(json, null, 2));
-    } catch (e) {
+    } catch {
       console.log('Not JSON response');
     }
   });

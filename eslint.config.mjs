@@ -22,6 +22,8 @@ export default [
         require: 'readonly',
         exports: 'readonly',
         global: 'readonly',
+        URLSearchParams: 'readonly',
+        window: 'readonly',
       },
     },
     plugins: {
