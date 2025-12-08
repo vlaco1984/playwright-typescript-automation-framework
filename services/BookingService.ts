@@ -145,6 +145,16 @@ export class BookingService {
   }
 
   /**
+   * Get booking HTTP status code (for verification of deletion, etc.)
+   * @param bookingId ID of the booking to check
+   * @returns Promise with HTTP status code
+   */
+  async getBookingStatus(bookingId: number): Promise<number> {
+    const response = await this.apiContext.get(`${this.baseURL}/booking/${bookingId}`);
+    return response.status();
+  }
+
+  /**
    * Delete a booking
    * @param bookingId ID of the booking to delete
    * @returns Promise<void>

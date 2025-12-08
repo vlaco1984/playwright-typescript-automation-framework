@@ -183,8 +183,10 @@ export class TestDataValidator {
         user.yearOfBirth,
       );
       if (!dobValid) {
+        const minYear = TEST_DATA_CONSTANTS.DATE_RANGES.BIRTH_YEAR_MIN;
+        const maxYear = TEST_DATA_CONSTANTS.DATE_RANGES.BIRTH_YEAR_MAX;
         errors.push(
-          'User date of birth is invalid (day: 1-31, month: valid month name, year: 1950-2010)',
+          `User date of birth is invalid (day: 1-31, month: valid month name, year: ${minYear}-${maxYear})`,
         );
       }
     }

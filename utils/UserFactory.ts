@@ -196,10 +196,6 @@ export class UserFactory {
   }
 
   /**
-   * Generates a random email
-   * @private
-   */
-  /**
    * Generates random email using centralized email domains
    * Includes timestamp for uniqueness
    * @private

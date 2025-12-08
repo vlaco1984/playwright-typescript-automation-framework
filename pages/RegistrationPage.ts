@@ -233,7 +233,6 @@ export class RegistrationPage extends BasePage {
 
     // Close consent modal if present before filling form - CRITICAL
     await this.handleModalIfPresent();
-    await new Promise((r) => setTimeout(r, 300));
 
     // Wait for title radio button to be visible and stable
     await this.titleMrRadio.waitFor({ state: 'visible', timeout: 5000 });
@@ -328,8 +327,8 @@ export class RegistrationPage extends BasePage {
     // Scroll to Create Account button to ensure it's visible and not obscured by ads
     await this.createAccountButton.scrollIntoViewIfNeeded();
 
-    // Wait briefly for any dynamic ads to finish loading/repositioning
-    await this.page.waitForTimeout(500);
+    // Wait for the Create Account button to be visible and attached before clicking
+    await this.createAccountButton.waitFor({ state: 'visible', timeout: 10000 });
 
     // Click the Create Account button - uses actionability checks to avoid clicking ads
     await this.createAccountButton.click({ timeout: 10000 });

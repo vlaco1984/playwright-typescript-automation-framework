@@ -158,7 +158,7 @@ export class BookingFactory {
     const { MIN_FUTURE_DAYS, CHECKOUT_DAYS_AFTER_CHECKIN, MAX_FUTURE_DAYS } =
       TEST_DATA_CONSTANTS.VALIDATION.DATE;
 
-    const minDays = afterDate ? MIN_FUTURE_DAYS : MIN_FUTURE_DAYS;
+    const minDays = MIN_FUTURE_DAYS;
     const maxDays = afterDate ? CHECKOUT_DAYS_AFTER_CHECKIN : MAX_FUTURE_DAYS;
     const randomDays = Math.floor(Math.random() * (maxDays - minDays + 1)) + minDays;
 

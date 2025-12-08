@@ -90,8 +90,8 @@ test.describe('Booking API - Full CRUD Flow', () => {
 
     // ============ STEP 7: VERIFY DELETION ============
     // Attempting to get deleted booking should return 404
-    const deleteResponse = await fetch(`https://restful-booker.herokuapp.com/booking/${bookingId}`);
-    expect(deleteResponse.status).toBe(404);
+    const status = await bookingService.getBookingStatus(bookingId);
+    expect(status).toBe(404);
     console.log('✓ Deletion verified: booking no longer exists');
   });
 
