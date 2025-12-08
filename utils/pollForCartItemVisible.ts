@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { CartPage } from '../pages/cartPage';
 
 /**
  * Asserts that a cart item becomes visible using Playwright's expect.poll.
@@ -10,10 +11,10 @@ export async function pollForCartItemVisible(
   page: Page,
   timeoutMs = 5000
 ): Promise<void> {
-  // Hardcoded selector for cart item (should match CartPage)
-  const cartItemSelector = 'td.cart_product';
+  // Use selector from CartPage page object
+  const cartPage = new CartPage(page);
   await expect.poll(async () => {
     await page.goto('/view_cart');
-    return await page.locator(cartItemSelector).isVisible();
+    return await page.locator(cartPage.cartItemSelector).isVisible();
   }, { timeout: timeoutMs }).toBe(true);
 }
