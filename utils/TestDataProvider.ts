@@ -7,6 +7,7 @@
 import { Booking, BookingFactory } from './BookingFactory';
 import { UserDetails, UserFactory } from './UserFactory';
 import { TEST_SCENARIOS } from './TestDataConstants';
+import { config } from './EnvConfig';
 
 /**
  * Collection of predefined booking data sets
@@ -158,19 +159,19 @@ export class UserDataProvider {
   static getUSUser(): UserDetails {
     return UserFactory.createCustomUser({
       country: 'United States',
-      city: 'New York',
+      city: config.testData.defaultCity,
       firstName: 'John',
       lastName: 'Smith',
     });
   }
 
   /**
-   * India-based user
+   * India-based user (or default country from config)
    */
   static getIndiaUser(): UserDetails {
     return UserFactory.createCustomUser({
-      country: 'India',
-      city: 'New York', // Though geographically inconsistent, based on predefined cities
+      country: config.testData.defaultCountry,
+      city: config.testData.defaultCity,
       firstName: 'Raj',
       lastName: 'Patel',
     });

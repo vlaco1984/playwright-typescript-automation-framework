@@ -8,17 +8,25 @@
  */
 
 // Factories
-export { BookingFactory, Booking, BookingDates } from './BookingFactory';
-export { UserFactory, UserDetails } from './UserFactory';
+export { BookingFactory } from './BookingFactory';
+export type { Booking, BookingDates } from './BookingFactory';
+export { UserFactory } from './UserFactory';
+export type { UserDetails } from './UserFactory';
 
 // Data providers and fixtures
 export { BookingDataProvider, UserDataProvider, TestScenarioProvider } from './TestDataProvider';
 
 // Validators
-export { TestDataValidator, ValidationResult, assertDataValid } from './TestDataValidator';
+export { TestDataValidator, assertDataValid } from './TestDataValidator';
+export type { ValidationResult } from './TestDataValidator';
 
 // Modal handling
-export { ModalHandler, ModalConfig } from './ModalHandler';
+export { ModalHandler } from './ModalHandler';
+export type { ModalConfig } from './ModalHandler';
 
 // Constants
 export { TEST_DATA_CONSTANTS, TEST_SCENARIOS } from './TestDataConstants';
+
+// Environment configuration
+export { config } from './EnvConfig';
+export type { EnvConfig } from './EnvConfig';

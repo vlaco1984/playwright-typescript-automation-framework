@@ -7,6 +7,7 @@
 
 import { APIRequestContext, expect } from '@playwright/test';
 import { Booking } from '../utils/BookingFactory';
+import { config } from '../utils/EnvConfig';
 
 export interface BookingResponse {
   bookingid: number;
@@ -24,7 +25,7 @@ export interface AuthResponse {
 export class BookingService {
   private readonly apiContext: APIRequestContext;
   private authToken: string = '';
-  private readonly baseURL = 'https://restful-booker.herokuapp.com';
+  private readonly baseURL = config.api.baseUrl;
 
   /**
    * Constructor with Dependency Inversion
@@ -41,8 +42,8 @@ export class BookingService {
   async authenticate(): Promise<string> {
     const response = await this.apiContext.post(`${this.baseURL}/auth`, {
       data: {
-        username: 'admin',
-        password: 'password123',
+        username: config.api.auth.username,
+        password: config.api.auth.password,
       },
     });
 

@@ -1,12 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import { config } from './utils/EnvConfig';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -25,15 +18,12 @@ export default defineConfig({
   reporter: [['html'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
 
-  /* Test timeout increased to handle slower page loads */
-  timeout: 60000,
+  /* Test timeout from environment */
+  timeout: config.timeouts.test,
 
   /* Configure projects for major browsers */
   projects: [
@@ -43,30 +33,30 @@ export default defineConfig({
       testDir: './tests/auth',
       testMatch: '**/cookieConsent.setup.ts',
       use: {
-        baseURL: 'https://automationexercise.com',
+        baseURL: config.ui.baseUrl,
       },
     },
     {
       name: 'api',
       testDir: './tests/api',
-      timeout: 30000,
+      timeout: config.timeouts.apiTest,
       use: {
-        baseURL: 'https://restful-booker.herokuapp.com',
+        baseURL: config.api.baseUrl,
       },
     },
     {
       name: 'e2e',
       testDir: './tests/ui',
-      timeout: 90000,
+      timeout: config.timeouts.e2eTest,
       fullyParallel: false,
       dependencies: ['setup'], // Run setup first
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'https://automationexercise.com',
-        actionTimeout: 15000,
-        navigationTimeout: 30000,
+        baseURL: config.ui.baseUrl,
+        actionTimeout: config.timeouts.action,
+        navigationTimeout: config.timeouts.navigation,
         // Use saved storage state to avoid cookie consent modal
-        storageState: '.auth/cookie-consent-state.json',
+        storageState: config.storageStatePath,
       },
     },
   ],
