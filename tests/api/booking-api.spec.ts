@@ -1,8 +1,8 @@
-import { test, expect, request } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { TestInfo } from '@playwright/test';
 import { BookingService } from '../../services/bookingService';
 import { buildBookingData } from '../../utils/dataBuilder';
-import { testUser, apiEndpoints } from '../../config/test-data';
+import { testUser, apiEndpoints, apiBaseUrl } from '../../config/test-data';
 
 
 let token: string;
@@ -16,8 +16,9 @@ test.afterEach(async ({}, testInfo: TestInfo) => {
 
 test.beforeAll(async ({ playwright }) => {
   const apiRequest = await playwright.request.newContext();
-  const response = await apiRequest.post(apiEndpoints.auth, {
+  const response = await apiRequest.post(`${apiBaseUrl}${apiEndpoints.auth}`, {
     data: { username: testUser.username, password: testUser.password },
+    headers: { 'Content-Type': 'application/json' }
   });
   token = (await response.json()).token;
   bookingService = new BookingService(apiRequest, token);
@@ -38,15 +39,18 @@ test('should get a booking by id', async () => {
   const getRes = await bookingService.getBooking(bookingId);
   expect(getRes.ok()).toBeTruthy();
   const booking = await getRes.json();
-  expect(booking.firstName).toBe(bookingData.firstName);
+  expect(booking.firstname).toBe(bookingData.firstname);
 });
 
-test('should fail unauthorized booking creation', async ({ playwright }) => {
+test('should fail unauthorized booking update', async ({ playwright }) => {
   const apiRequest = await playwright.request.newContext();
   const bookingServiceNoAuth = new BookingService(apiRequest, '');
   const bookingData = buildBookingData();
-  const response = await bookingServiceNoAuth.createBooking(bookingData);
-  expect(response.status()).toBe(401);
+  const createRes = await bookingServiceNoAuth.createBooking(bookingData);
+  const bookingId = (await createRes.json()).bookingid;
+  const updateRes = await bookingServiceNoAuth.updateBooking(bookingId, buildBookingData({ firstName: 'NoAuth' }));
+  expect(updateRes.status()).toBe(403);
+});
 
 test('should update a booking', async () => {
   // Create a booking first
@@ -56,11 +60,11 @@ test('should update a booking', async () => {
 
   // Prepare updated data
   const updatedData = buildBookingData({
-    firstName: 'Jane',
-    lastName: 'Smith',
-    totalPrice: 150,
-    depositPaid: false,
-    additionalNeeds: 'Lunch',
+    firstname: 'Jane',
+    lastname: 'Smith',
+    totalprice: 150,
+    depositpaid: false,
+    additionalneeds: 'Lunch',
   });
 
   // Update the booking
@@ -70,10 +74,9 @@ test('should update a booking', async () => {
   // Verify the update
   const getRes = await bookingService.getBooking(bookingId);
   const booking = await getRes.json();
-  expect(booking.firstName).toBe('Jane');
-  expect(booking.lastName).toBe('Smith');
-  expect(booking.totalPrice).toBe(150);
-  expect(booking.depositPaid).toBe(false);
-  expect(booking.additionalNeeds).toBe('Lunch');
-});
+  expect(booking.firstname).toBe('Jane');
+  expect(booking.lastname).toBe('Smith');
+  expect(booking.totalprice).toBe(150);
+  expect(booking.depositpaid).toBe(false);
+  expect(booking.additionalneeds).toBe('Lunch');
 });

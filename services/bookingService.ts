@@ -6,23 +6,21 @@ export class BookingService {
   constructor(private apiRequest: APIRequestContext, private token: string) {}
 
   async createBooking(data: any) {
-    return this.apiRequest.post(apiEndpoints.booking, {
+    return this.apiRequest.post(`${apiBaseUrl}${apiEndpoints.booking}`, {
       data,
-      headers: { Authorization: `Bearer ${this.token}` },
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 
   async getBooking(id: string) {
-    return this.apiRequest.get(`${apiEndpoints.booking}/${id}`, {
-      headers: { Authorization: `Bearer ${this.token}` },
-    });
+    return this.apiRequest.get(`${apiBaseUrl}${apiEndpoints.booking}/${id}`);
   }
 
   async updateBooking(id: string, data: any) {
-    return this.apiRequest.put(`${apiEndpoints.booking}/${id}`, {
+    return this.apiRequest.put(`${apiBaseUrl}${apiEndpoints.booking}/${id}`, {
       data,
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Cookie: `token=${this.token}`,
         'Content-Type': 'application/json',
       },
     });
