@@ -1,14 +1,9 @@
-import { pollForCartItemVisible } from '../../utils/pollForCartItemVisible';
-
+import { expect, Page } from '@playwright/test';
 import { test, testInvalid } from './login.fixtures';
-import { expect } from '@playwright/test';
-import { LoginPage } from '../../pages/loginPage';
-
+// expect is already imported above
 import { RegisterPage } from '../../pages/registerPage';
 import { ProductsPage } from '../../pages/productsPage';
 import { CartPage } from '../../pages/cartPage';
-import { testUser } from '../../config/test-data';
-// import { OrdersPage } from '../../pages/ordersPage';
 
 test('should register a new user via UI and verify via API', async ({ page, request }) => {
   const registerPage = new RegisterPage(page);
@@ -16,22 +11,30 @@ test('should register a new user via UI and verify via API', async ({ page, requ
   // Close consent modal if present
   const consentBtn = await page.$('button:has-text("Consent")');
   if (consentBtn) await consentBtn.click();
-  await registerPage.register('newuser@example.com', 'Password123!');
-  // API check: verify user exists
-  const res = await request.get('https://automationexercise.com/api/getUserDetailByEmail?email=newuser@example.com');
-  const body = await res.json();
-  expect(body.responseCode).toBe(200);
-  expect(body.user.email).toBe('newuser@example.com');
+    const uniqueEmail = `newuser.${Date.now()}@example.com`;
+    await registerPage.register('New User', uniqueEmail, 'Password123!');
+    // Assert via expect.poll: wait until API reports the user exists
+    await expect.poll(async () => {
+      const res = await request.get(`https://automationexercise.com/api/getUserDetailByEmail?email=${uniqueEmail}`);
+      const body = await res.json();
+      return body.responseCode;
+    }, { timeout: 10000 }).toBe(200);
+    // Final check: confirm email matches
+    const verifyRes = await request.get(`https://automationexercise.com/api/getUserDetailByEmail?email=${uniqueEmail}`);
+    const verifyBody = await verifyRes.json();
+    expect(verifyBody.user.email).toBe(uniqueEmail);
 });
 
-test('should login, add product to cart, and verify via API', async ({ page, request, loggedIn }) => {
+test('should login, add product to cart, and verify on checkout page', async ({ page, request, loggedIn }) => {
   const productsPage = new ProductsPage(page);
   const cartPage = new CartPage(page);
   await productsPage.goto();
   await productsPage.addFirstProductToCart();
   await cartPage.goto();
-  // UI check: verify cart has items
-  await pollForCartItemVisible(page);
+  await expect.poll(async () => {
+    await page.goto('/view_cart');
+    return await page.locator('td.cart_product').isVisible();
+  }, { timeout: 5000 }).toBe(true);
 });
 
 
