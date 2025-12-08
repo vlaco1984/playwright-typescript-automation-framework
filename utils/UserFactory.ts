@@ -67,9 +67,10 @@ export class UserFactory {
 
   /**
    * Creates a complete user registration object with random data
+   * @param customizedFields Optional fields to customize the user
    * @returns A complete user details object
    */
-  static createUser(overrides?: Partial<UserDetails>): UserDetails {
+  static createUser(customizedFields?: Partial<UserDetails>): UserDetails {
     const firstName = this.getRandomElement(this.FIRST_NAMES);
     const lastName = this.getRandomElement(this.LAST_NAMES);
     const email = this.generateRandomEmail(firstName, lastName);
@@ -96,14 +97,15 @@ export class UserFactory {
       mobileNumber: this.generateRandomPhoneNumber(),
     };
 
-    return { ...user, ...overrides };
+    return { ...user, ...customizedFields };
   }
 
   /**
    * Creates a user with minimal required fields only
+   * @param customizedFields Optional fields to customize the user
    * @returns A user with only required fields filled
    */
-  static createMinimalUser(overrides?: Partial<UserDetails>): UserDetails {
+  static createMinimalUser(customizedFields?: Partial<UserDetails>): UserDetails {
     const firstName = this.getRandomElement(this.FIRST_NAMES);
     const lastName = this.getRandomElement(this.LAST_NAMES);
     const email = this.generateRandomEmail(firstName, lastName);
@@ -130,7 +132,7 @@ export class UserFactory {
       mobileNumber: '9876543210',
     };
 
-    return { ...user, ...overrides };
+    return { ...user, ...customizedFields };
   }
 
   /**

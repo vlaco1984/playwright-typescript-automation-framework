@@ -45,9 +45,10 @@ export class BookingFactory {
 
   /**
    * Creates a valid booking object with random data
+   * @param customizedFields Optional fields to customize the booking
    * @returns A complete booking object
    */
-  static createBooking(overrides?: Partial<Booking>): Booking {
+  static createBooking(customizedFields?: Partial<Booking>): Booking {
     const checkinDate = this.generateFutureDate();
     const checkoutDate = this.generateFutureDate(checkinDate);
 
@@ -63,14 +64,15 @@ export class BookingFactory {
       additionalneeds: this.getRandomElement(this.ADDITIONAL_NEEDS),
     };
 
-    return { ...booking, ...overrides };
+    return { ...booking, ...customizedFields };
   }
 
   /**
    * Creates a booking with minimal required fields
+   * @param customizedFields Optional fields to customize the booking
    * @returns A booking with only required fields
    */
-  static createMinimalBooking(overrides?: Partial<Booking>): Booking {
+  static createMinimalBooking(customizedFields?: Partial<Booking>): Booking {
     const checkinDate = this.generateFutureDate();
     const checkoutDate = this.generateFutureDate(checkinDate);
 
@@ -85,7 +87,7 @@ export class BookingFactory {
       },
     };
 
-    return { ...booking, ...overrides };
+    return { ...booking, ...customizedFields };
   }
 
   /**
