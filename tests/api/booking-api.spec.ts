@@ -1,18 +1,16 @@
-import { test, expect } from '@playwright/test';;
+import { test, expect } from '@playwright/test';
 import { BookingService } from '../../services/bookingService';
 import { buildBookingData } from '../../utils/helpers';
 import { testUser, apiEndpoints, apiBaseUrl } from '../../config/test-data';
 
-
 let token: string;
 let bookingService: BookingService;
-
 
 test.beforeAll(async ({ playwright }) => {
   const apiRequest = await playwright.request.newContext();
   const response = await apiRequest.post(`${apiBaseUrl}${apiEndpoints.auth}`, {
     data: { username: testUser.username, password: testUser.password },
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   });
   const authBody = (await response.json()) as { token: string };
   token = authBody.token;
@@ -51,7 +49,10 @@ test('should fail unauthorized booking update', async ({ playwright }) => {
   const createRes = await bookingServiceNoAuth.createBooking(bookingData);
   const created = (await createRes.json()) as { bookingid: number };
   const bookingId = created.bookingid;
-  const updateRes = await bookingServiceNoAuth.updateBooking(bookingId, buildBookingData({ firstname: 'NoAuth' }));
+  const updateRes = await bookingServiceNoAuth.updateBooking(
+    bookingId,
+    buildBookingData({ firstname: 'NoAuth' }),
+  );
   expect(updateRes.status()).toBe(403);
 });
 

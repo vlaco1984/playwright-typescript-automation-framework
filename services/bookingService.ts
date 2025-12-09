@@ -17,7 +17,10 @@ export interface BookingData {
 }
 
 export class BookingService {
-  constructor(private apiRequest: APIRequestContext, private token: string) {}
+  constructor(
+    private apiRequest: APIRequestContext,
+    private token: string,
+  ) {}
 
   async createBooking(data: BookingData): Promise<APIResponse> {
     return this.apiRequest.post(`${apiBaseUrl}${apiEndpoints.booking}`, {

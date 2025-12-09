@@ -9,14 +9,6 @@
     "skipLibCheck": true,
     "types": ["node", "playwright"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "allure-results",
-    "playwright-report",
-    "test-results"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "allure-results", "playwright-report", "test-results"]
 }

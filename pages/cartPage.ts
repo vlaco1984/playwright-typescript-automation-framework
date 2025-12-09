@@ -13,6 +13,10 @@ export class CartPage {
     await this.page.goto('/view_cart');
     await closeConsentModal(this.page);
   }
-  cartItems(): Locator { return this.page.locator(this.cartItemSelector); }
-  async checkout() { await this.page.click(this.checkoutButton); }
+  cartItems(): Locator {
+    return this.page.locator(this.cartItemSelector);
+  }
+  async checkout() {
+    await this.page.click(this.checkoutButton);
+  }
 }

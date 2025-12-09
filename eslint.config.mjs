@@ -10,7 +10,7 @@ const tsRootDir = dirname(fileURLToPath(import.meta.url));
 
 export default tseslint.config(
   {
-    ignores: ['node_modules', 'playwright-report', 'allure-results', 'test-results']
+    ignores: ['node_modules', 'playwright-report', 'allure-results', 'test-results'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -21,16 +21,19 @@ export default tseslint.config(
       sourceType: 'module',
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: tsRootDir
-      }
+        tsconfigRootDir: tsRootDir,
+      },
     },
     linterOptions: {
-      reportUnusedDisableDirectives: true
+      reportUnusedDisableDirectives: true,
     },
     rules: {
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }]
-    }
-  }
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+    },
+  },
 );

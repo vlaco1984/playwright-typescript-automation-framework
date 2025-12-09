@@ -78,5 +78,7 @@ export class RegisterPage {
       await createBtn.click();
     }
   }
-  successMessage(): Locator { return this.page.locator(this.successMessageSelector); }
+  successMessage(): Locator {
+    return this.page.locator(this.successMessageSelector);
+  }
 }
