@@ -1,6 +1,6 @@
 export const uiApiTestUser = {
-  email: "uiapitestuser@example.com",
-  password: "UiApiTest123!"
+  email: 'uiapitestuser@example.com',
+  password: 'UiApiTest123!'
 };
 // Centralized test data and config
 export const testUser = {

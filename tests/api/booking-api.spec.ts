@@ -1,18 +1,12 @@
-import { test, expect } from '@playwright/test';
-import { TestInfo } from '@playwright/test';
+import { test, expect } from '@playwright/test';;
 import { BookingService } from '../../services/bookingService';
-import { buildBookingData } from '../../utils/dataBuilder';
+import { buildBookingData } from '../../utils/helpers';
 import { testUser, apiEndpoints, apiBaseUrl } from '../../config/test-data';
 
 
 let token: string;
 let bookingService: BookingService;
 
-test.afterEach(async ({}, testInfo: TestInfo) => {
-  if (testInfo.status === 'passed') {
-    console.log(`✅ Test passed: ${testInfo.title}`);
-  }
-});
 
 test.beforeAll(async ({ playwright }) => {
   const apiRequest = await playwright.request.newContext();
@@ -20,7 +14,8 @@ test.beforeAll(async ({ playwright }) => {
     data: { username: testUser.username, password: testUser.password },
     headers: { 'Content-Type': 'application/json' }
   });
-  token = (await response.json()).token;
+  const authBody = (await response.json()) as { token: string };
+  token = authBody.token;
   bookingService = new BookingService(apiRequest, token);
 });
 
@@ -28,17 +23,24 @@ test('should create a booking', async () => {
   const bookingData = buildBookingData();
   const response = await bookingService.createBooking(bookingData);
   expect(response.ok()).toBeTruthy();
-  const body = await response.json();
-  expect(body).toHaveProperty('bookingid');
+  const body = (await response.json()) as { bookingid: number };
+  expect(body.bookingid).toBeDefined();
 });
 
 test('should get a booking by id', async () => {
   const bookingData = buildBookingData();
   const createRes = await bookingService.createBooking(bookingData);
-  const bookingId = (await createRes.json()).bookingid;
+  const createBody = (await createRes.json()) as { bookingid: number };
+  const bookingId = createBody.bookingid;
   const getRes = await bookingService.getBooking(bookingId);
   expect(getRes.ok()).toBeTruthy();
-  const booking = await getRes.json();
+  const booking = (await getRes.json()) as {
+    firstname: string;
+    lastname: string;
+    totalprice: number;
+    depositpaid: boolean;
+    additionalneeds?: string;
+  };
   expect(booking.firstname).toBe(bookingData.firstname);
 });
 
@@ -47,8 +49,9 @@ test('should fail unauthorized booking update', async ({ playwright }) => {
   const bookingServiceNoAuth = new BookingService(apiRequest, '');
   const bookingData = buildBookingData();
   const createRes = await bookingServiceNoAuth.createBooking(bookingData);
-  const bookingId = (await createRes.json()).bookingid;
-  const updateRes = await bookingServiceNoAuth.updateBooking(bookingId, buildBookingData({ firstName: 'NoAuth' }));
+  const created = (await createRes.json()) as { bookingid: number };
+  const bookingId = created.bookingid;
+  const updateRes = await bookingServiceNoAuth.updateBooking(bookingId, buildBookingData({ firstname: 'NoAuth' }));
   expect(updateRes.status()).toBe(403);
 });
 
@@ -56,7 +59,8 @@ test('should update a booking', async () => {
   // Create a booking first
   const bookingData = buildBookingData();
   const createRes = await bookingService.createBooking(bookingData);
-  const bookingId = (await createRes.json()).bookingid;
+  const created = (await createRes.json()) as { bookingid: number };
+  const bookingId = created.bookingid;
 
   // Prepare updated data
   const updatedData = buildBookingData({
@@ -73,7 +77,13 @@ test('should update a booking', async () => {
 
   // Verify the update
   const getRes = await bookingService.getBooking(bookingId);
-  const booking = await getRes.json();
+  const booking = (await getRes.json()) as {
+    firstname: string;
+    lastname: string;
+    totalprice: number;
+    depositpaid: boolean;
+    additionalneeds?: string;
+  };
   expect(booking.firstname).toBe('Jane');
   expect(booking.lastname).toBe('Smith');
   expect(booking.totalprice).toBe(150);

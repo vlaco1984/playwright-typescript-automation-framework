@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { test, testInvalid } from './login.fixtures';
 // expect is already imported above
 import { RegisterPage } from '../../pages/registerPage';
@@ -25,7 +25,7 @@ test('should register a new user via UI and verify via API', async ({ page, requ
     expect(verifyBody.user.email).toBe(uniqueEmail);
 });
 
-test('should login, add product to cart, and verify on checkout page', async ({ page, request, loggedIn }) => {
+test('should login, add product to cart, and verify on checkout page', async ({ page }) => {
   const productsPage = new ProductsPage(page);
   const cartPage = new CartPage(page);
   await productsPage.goto();
@@ -33,17 +33,18 @@ test('should login, add product to cart, and verify on checkout page', async ({ 
   await cartPage.goto();
   await expect.poll(async () => {
     await page.goto('/view_cart');
-    return await page.locator('td.cart_product').isVisible();
+    const visible = await page.locator('td.cart_product').isVisible();
+    return visible;
   }, { timeout: 5000 }).toBe(true);
 });
 
 
 
-testInvalid('should show error for invalid login', async ({ page, loginFailed }) => {
+testInvalid('should show error for invalid login', async ({ page }) => {
   // API check: verify login fails
   const res = await page.request.post('https://automationexercise.com/api/verifyLogin', {
     data: { email: 'wronguser@example.com', password: 'wrongpassword' }
   });
-  const body = await res.json();
+  const body = (await res.json()) as { responseCode: number };
   expect(body.responseCode).not.toBe(200);
 });
