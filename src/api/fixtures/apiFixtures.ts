@@ -22,7 +22,7 @@ export const test = baseTest.extend<APIFixtures>({
     await use(new ProductService(request));
   },
 
-  uniqueUserData: async (_fixtures, use) => {
+  uniqueUserData: async ({ page: _page }: { page?: unknown }, use) => {
     await use(UserDataFactory.generateUserData());
   },
 });

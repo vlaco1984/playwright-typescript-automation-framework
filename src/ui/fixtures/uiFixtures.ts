@@ -46,7 +46,7 @@ export const test = baseTest.extend<UIFixtures>({
     await use(new UserService(request));
   },
 
-  uniqueUserData: async (_fixtures, use) => {
+  uniqueUserData: async ({ page: _page }: { page?: unknown }, use) => {
     await use(UserDataFactory.generateUserData());
   },
 });
