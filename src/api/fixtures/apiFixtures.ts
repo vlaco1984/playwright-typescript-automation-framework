@@ -22,7 +22,7 @@ export const test = baseTest.extend<APIFixtures>({
     await use(new ProductService(request));
   },
 
-  uniqueUserData: async (_, use) => {
+  uniqueUserData: async (_context, use) => {
     await use(UserDataFactory.generateUserData());
   },
 });

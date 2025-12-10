@@ -39,7 +39,14 @@ export abstract class BaseComponent {
    * Wait for element to be present
    */
   protected async waitForElement(locator: Locator, timeout = 10000): Promise<void> {
-    await locator.waitFor({ timeout });
+    try {
+      await locator.waitFor({ timeout });
+    } catch (error) {
+      if (error.message.includes('Target page, context or browser has been closed')) {
+        throw new Error('Browser context was closed unexpectedly');
+      }
+      throw error;
+    }
   }
 
   /**

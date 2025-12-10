@@ -22,7 +22,7 @@ tools:
     'runSubagent',
     'runTests',
   ]
-model: Claude Sonnet 4
+model: GPT-5
 ---
 
 ## Core Responsibilities

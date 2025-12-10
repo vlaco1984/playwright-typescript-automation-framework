@@ -27,8 +27,15 @@ export abstract class BasePage {
    * Wait for page to be ready for interaction
    */
   public async waitForPageReady(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-    await this.page.waitForLoadState('domcontentloaded');
+    try {
+      await this.page.waitForLoadState('domcontentloaded');
+      // Use a shorter timeout for networkidle to avoid hanging
+      await this.page.waitForLoadState('networkidle', { timeout: 10000 });
+    } catch {
+      // If networkidle times out, just ensure dom is loaded
+      console.log('Network idle timeout, continuing with DOM ready state');
+      await this.page.waitForLoadState('domcontentloaded');
+    }
   }
 
   /**

@@ -83,6 +83,8 @@ export default [
       'playwright-report/**',
       'test-results/**',
       'allure-results/**',
+      'reports/**',
+      'scripts/**',
       'coverage/**',
       '*.config.js',
       '*.config.mjs',

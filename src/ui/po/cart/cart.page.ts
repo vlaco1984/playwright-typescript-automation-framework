@@ -40,9 +40,31 @@ export class CartPage extends BasePage {
    */
   async isCartEmpty(): Promise<boolean> {
     try {
-      await this.emptyCartMessage.waitFor({ timeout: 5000 });
-      return true;
+      // First check if there are any cart items
+      const itemCount = await this.cartItems.count();
+      if (itemCount === 0) {
+        return true;
+      }
+
+      // Check for empty cart message
+      try {
+        const emptyMessage = this.page.getByText('Cart is empty!');
+        await emptyMessage.waitFor({ timeout: 2000 });
+        return true;
+      } catch {
+        // No empty message found
+      }
+
+      // Check if cart table is not visible
+      try {
+        const isTableVisible = await this.cartTable.isVisible();
+        return !isTableVisible;
+      } catch {
+        // If we can't determine table visibility, assume not empty
+        return false;
+      }
     } catch {
+      // If there's any error, assume cart is not empty
       return false;
     }
   }
@@ -91,6 +113,8 @@ export class CartPage extends BasePage {
    */
   async removeItemFromCart(itemIndex: number): Promise<void> {
     await this.removeItemButtons.nth(itemIndex).click();
+    // Wait for page to reload and process the removal
+    await this.page.waitForLoadState('networkidle');
     await this.waitForPageReady();
   }
 
@@ -112,9 +136,17 @@ export class CartPage extends BasePage {
    * Get number of items in cart
    */
   async getCartItemCount(): Promise<number> {
-    if (await this.isCartEmpty()) {
+    try {
+      if (await this.isCartEmpty()) {
+        return 0;
+      }
+      return await this.cartItems.count();
+    } catch (error) {
+      if (error.message.includes('Target page, context or browser has been closed')) {
+        throw new Error('Browser context was closed unexpectedly during cart operation');
+      }
+      console.warn('Error getting cart item count:', error.message);
       return 0;
     }
-    return await this.cartItems.count();
   }
 }

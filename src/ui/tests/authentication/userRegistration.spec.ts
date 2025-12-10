@@ -56,7 +56,9 @@ test.describe('User Registration - UI to API Verification @critical @smoke', () 
 
     // Cleanup: Note - user cleanup not possible due to CSRF protection
     await test.step('Note: User cleanup not performed', async () => {
-      console.log('Note: User account created will remain due to API CSRF protection - this is expected for automation exercise');
+      console.log(
+        'Note: User account created will remain due to API CSRF protection - this is expected for automation exercise',
+      );
     });
   });
 
@@ -78,7 +80,7 @@ test.describe('User Registration - UI to API Verification @critical @smoke', () 
 
         // Verify user is logged in
         await expect(authenticationPage.loggedInUserText).toBeVisible();
-        
+
         // Logout to test duplicate registration
         await page.getByRole('link', { name: ' Logout' }).click();
       } catch {
@@ -92,19 +94,14 @@ test.describe('User Registration - UI to API Verification @critical @smoke', () 
       await authenticationPage.navigateToAuthenticationPage();
       await authenticationPage.startSignup('Different Name', uniqueUserData.email);
 
-      // Should see error message or stay on login page
-      // Wait a bit for any error message to appear
-      await page.waitForTimeout(2000);
-      
-      const currentUrl = page.url();
-      
-      // Either we stay on login page or see an error
-      if (currentUrl.includes('/login')) {
+      // Either we stay on login page or see an error (auto-wait)
+      const duplicateError = page.getByText('Email Address already exist');
+      const stayedOnLogin = page.url().includes('/login');
+
+      if (stayedOnLogin) {
         console.log('Correctly stayed on login page for duplicate email');
       } else {
-        // Check if there's an error message visible
-        const errorVisible = await page.getByText('Email Address already exist').isVisible();
-        expect(errorVisible).toBe(true);
+        await expect(duplicateError).toBeVisible();
       }
     });
   });
