@@ -19,13 +19,16 @@ test.describe('Order Completion - Purchase + Order History @critical @e2e', () =
     uniqueUserData,
     request,
   }) => {
-    // Step 1: Create user account
-    await test.step('Create user account via API', async () => {
-      const { UserService } = await import('../../../api/services/user.service');
-      const userService = new UserService(request);
+    // Step 1: Create user account via UI (API has CSRF protection)
+    await test.step('Create user account via UI', async () => {
+      await authenticationPage.navigateToAuthenticationPage();
+      await authenticationPage.startSignup(uniqueUserData.name, uniqueUserData.email);
+      await authenticationPage.completeRegistration(uniqueUserData);
+      await authenticationPage.continueButton.click();
 
-      const createResponse = await userService.createUser(uniqueUserData);
-      expect(createResponse.status()).toBe(201);
+      // Verify user is logged in
+      await expect(authenticationPage.loggedInUserText).toBeVisible();
+      console.log('User created and logged in successfully');
     });
 
     // Step 2: Login and add products to cart
@@ -135,12 +138,13 @@ test.describe('Order Completion - Purchase + Order History @critical @e2e', () =
   }) => {
     // Setup: Create user and add single product
     await test.step('Setup: Create user and add single product', async () => {
-      const { UserService } = await import('../../../api/services/user.service');
-      const userService = new UserService(request);
-
-      await userService.createUser(uniqueUserData);
       await authenticationPage.navigateToAuthenticationPage();
-      await authenticationPage.login(uniqueUserData.email, uniqueUserData.password);
+      await authenticationPage.startSignup(uniqueUserData.name, uniqueUserData.email);
+      await authenticationPage.completeRegistration(uniqueUserData);
+      await authenticationPage.continueButton.click();
+
+      // Verify user is logged in
+      await expect(authenticationPage.loggedInUserText).toBeVisible();
 
       await navbar.goToProducts();
       const productNames = await productsPage.getProductNames();
@@ -186,12 +190,13 @@ test.describe('Order Completion - Purchase + Order History @critical @e2e', () =
   }) => {
     // Setup
     await test.step('Setup: Create user and add products', async () => {
-      const { UserService } = await import('../../../api/services/user.service');
-      const userService = new UserService(request);
-
-      await userService.createUser(uniqueUserData);
       await authenticationPage.navigateToAuthenticationPage();
-      await authenticationPage.login(uniqueUserData.email, uniqueUserData.password);
+      await authenticationPage.startSignup(uniqueUserData.name, uniqueUserData.email);
+      await authenticationPage.completeRegistration(uniqueUserData);
+      await authenticationPage.continueButton.click();
+
+      // Verify user is logged in
+      await expect(authenticationPage.loggedInUserText).toBeVisible();
 
       await navbar.goToProducts();
       const productNames = await productsPage.getProductNames();

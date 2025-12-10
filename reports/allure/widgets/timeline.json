@@ -1,1 +1,733 @@
-[{"id":"9ac771c65ef00e9f90aacac7d313bbf8","historyId":"166ff48bc44687e636e0ed882069aa3d.b444eb0fbe6390c71e68b51dd25701fc","name":"should display error for duplicate email registration","status":"failed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.authentication.userRegistration.spec.ts"},{"name":"titlePath","value":" > firefox > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"},{"name":"tag","value":"critical"},{"name":"tag","value":"smoke"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-9672-worker-0"},{"name":"parentSuite","value":"firefox"},{"name":"suite","value":"ui\\tests\\authentication\\userRegistration.spec.ts"},{"name":"subSuite","value":"User Registration - UI to API Verification @critical @smoke"}],"environment":"default","start":1765370707547,"stop":1765370726783,"duration":19236},{"id":"0394d184aafa2f62505005b4a37cfdcd","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-37772-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198730294,"stop":1765198746179,"duration":15885},{"id":"39df5c8094f5644e6de8d0f61921c414","historyId":"9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle multiple cookie acceptance attempts gracefully","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-13072-worker-2"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765196580239,"stop":1765196594148,"duration":13909},{"id":"1e77e67c482f47c4f8c47e89a207d9a9","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-17616-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198752813,"stop":1765198770278,"duration":17465},{"id":"e820e6221e3c5c0728f468d4fa60bc1b","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-4700-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765194812939,"stop":1765194826742,"duration":13803},{"id":"10427867cbe90b413049b22df9dcf809","historyId":"72a7fdbdd64ba4083e03bdd0c4a04d3b.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie consent handles multiple acceptance attempts gracefully","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-35432-worker-2"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765196251561,"stop":1765196269642,"duration":18081},{"id":"3fb5bdb3201e29a1dfa014f1865a4c25","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1336-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765195140873,"stop":1765195158532,"duration":17659},{"id":"df282fd743727667853a788e7dd9c862","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"failed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-24344-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765194774094,"stop":1765194781829,"duration":7735},{"id":"c50d50eaa153ba3bc48994ec5fc8f5eb","historyId":"0c124fb8e7270a0d7818eba8272a0d6a.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Page loads correctly after cookie consent","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-35432-worker-1"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765196251547,"stop":1765196271013,"duration":19466},{"id":"0d73ad09ba2662f49867774d7b236134","historyId":"9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle multiple cookie acceptance attempts gracefully","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-17616-worker-2"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198752830,"stop":1765198767138,"duration":14308},{"id":"1f0592b858ca1fc0d336c4dd63ab1b7b","historyId":"639f240236cbb28a99cf1cd2079b03a3.b444eb0fbe6390c71e68b51dd25701fc","name":"should register new user via UI and verify user creation via API","status":"failed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.authentication.userRegistration.spec.ts"},{"name":"titlePath","value":" > firefox > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"},{"name":"tag","value":"critical"},{"name":"tag","value":"smoke"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-9672-worker-0"},{"name":"parentSuite","value":"firefox"},{"name":"suite","value":"ui\\tests\\authentication\\userRegistration.spec.ts"},{"name":"subSuite","value":"User Registration - UI to API Verification @critical @smoke"}],"environment":"default","start":1765370684048,"stop":1765370704946,"duration":20898},{"id":"23f53c92cc522e87e51a57b746ca2518","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"failed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1396-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765194706060,"stop":1765194717366,"duration":11306},{"id":"ee24b1a11cf3ba1816f3843fe6a64bb5","historyId":"c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should load page correctly after automatic cookie handling","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-17616-worker-1"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198752833,"stop":1765198767204,"duration":14371},{"id":"c0303158dfa2b198ffe7bf901166605e","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-20468-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765196557099,"stop":1765196574198,"duration":17099},{"id":"46669cf38015ee17e2d4a4d8ae8aa355","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1404-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198580214,"stop":1765198597681,"duration":17467},{"id":"2a8f50d64b0ebc4fe26150819e2767ef","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-35432-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765196251552,"stop":1765196275439,"duration":23887},{"id":"4e6d468176382ebc8ac8e4e51ea30a98","historyId":"c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should load page correctly after automatic cookie handling","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1404-worker-1"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198580209,"stop":1765198594939,"duration":14730},{"id":"0ea05843ea400d1cd6d930783323d4b8","historyId":"84b9776fe3760e57a42ed9ee5c9d2a82.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should verify navigation elements work after cookie consent","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-17616-worker-4"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198752854,"stop":1765198767218,"duration":14364},{"id":"3bab78d8e596ac546c56e4f37c6be9d1","historyId":"84b9776fe3760e57a42ed9ee5c9d2a82.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should verify navigation elements work after cookie consent","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1404-worker-4"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198580206,"stop":1765198594915,"duration":14709},{"id":"8163d3dc52183e2f9387f3795b837895","historyId":"9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle multiple cookie acceptance attempts gracefully","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1404-worker-2"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198580229,"stop":1765198594808,"duration":14579},{"id":"acabfe669ea42d00eb6bb202d54ddde7","historyId":"b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle cookie consent in iframe context","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-13072-worker-3"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765196580249,"stop":1765196600209,"duration":19960},{"id":"337218dd95c28ac2ca38c7d2e4b9dedc","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-13072-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765196580243,"stop":1765196600072,"duration":19829},{"id":"2964a76b4c3545e2012b8397c63324d5","historyId":"21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display cookie banner and allow acceptance","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-8872-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198553216,"stop":1765198572910,"duration":19694},{"id":"f47aa5ca41a8919d1aed7501d0349b51","historyId":"b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle cookie consent in iframe context","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-1404-worker-3"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198580223,"stop":1765198597908,"duration":17685},{"id":"3b9118479734be768e3de52d2e010d7d","historyId":"b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should handle cookie consent in iframe context","status":"passed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-17616-worker-3"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765198752817,"stop":1765198770332,"duration":17515},{"id":"c2d149e04bff9db071feb1e61fcf1e85","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"failed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-21608-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765187117459,"stop":1765187129886,"duration":12427},{"id":"cb09ff5c43abfbd053aa762cd2ad2795","historyId":"c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should load page correctly after automatic cookie handling","status":"passed","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.cookie-consent.cookieBanner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-13072-worker-1"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\cookie-consent\\cookieBanner.spec.ts"},{"name":"subSuite","value":"Cookie Banner Functionality"}],"environment":"default","start":1765196580246,"stop":1765196596297,"duration":16051},{"id":"3c17a438f2b3051ccc50c86d4f89aa41","historyId":"79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"Cookie banner appears and can be accepted","status":"broken","hidden":true,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.cookie-banner.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\cookie-banner.spec.ts > Cookie banner"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-3224-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\cookie-banner.spec.ts"},{"name":"subSuite","value":"Cookie banner"}],"environment":"default","start":1765186782679,"stop":1765186812843,"duration":30164},{"id":"972502515fa484dfd7489e393aa3edcb","historyId":"639f240236cbb28a99cf1cd2079b03a3.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should register new user via UI and verify user creation via API","status":"failed","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.authentication.userRegistration.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"},{"name":"tag","value":"critical"},{"name":"tag","value":"smoke"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-9672-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\authentication\\userRegistration.spec.ts"},{"name":"subSuite","value":"User Registration - UI to API Verification @critical @smoke"}],"environment":"default","start":1765370631741,"stop":1765370650896,"duration":19155},{"id":"8ea18fcfba8d99a30112e3026f7ddb47","historyId":"166ff48bc44687e636e0ed882069aa3d.5bd835b0d6b1d4ada3b9f0db936e82c8","name":"should display error for duplicate email registration","status":"broken","hidden":false,"labels":[{"name":"language","value":"javascript"},{"name":"framework","value":"playwright"},{"name":"package","value":"ui.tests.authentication.userRegistration.spec.ts"},{"name":"titlePath","value":" > chromium > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"},{"name":"tag","value":"critical"},{"name":"tag","value":"smoke"},{"name":"host","value":"EPHUDEBW00A3"},{"name":"thread","value":"pid-9672-worker-0"},{"name":"parentSuite","value":"chromium"},{"name":"suite","value":"ui\\tests\\authentication\\userRegistration.spec.ts"},{"name":"subSuite","value":"User Registration - UI to API Verification @critical @smoke"}],"environment":"default","start":1765370652149,"stop":1765370682782,"duration":30633}]
+[
+  {
+    "id": "9ac771c65ef00e9f90aacac7d313bbf8",
+    "historyId": "166ff48bc44687e636e0ed882069aa3d.b444eb0fbe6390c71e68b51dd25701fc",
+    "name": "should display error for duplicate email registration",
+    "status": "failed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.authentication.userRegistration.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > firefox > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"
+      },
+      { "name": "tag", "value": "critical" },
+      { "name": "tag", "value": "smoke" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-9672-worker-0" },
+      { "name": "parentSuite", "value": "firefox" },
+      { "name": "suite", "value": "ui\\tests\\authentication\\userRegistration.spec.ts" },
+      { "name": "subSuite", "value": "User Registration - UI to API Verification @critical @smoke" }
+    ],
+    "environment": "default",
+    "start": 1765370707547,
+    "stop": 1765370726783,
+    "duration": 19236
+  },
+  {
+    "id": "0394d184aafa2f62505005b4a37cfdcd",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-37772-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198730294,
+    "stop": 1765198746179,
+    "duration": 15885
+  },
+  {
+    "id": "39df5c8094f5644e6de8d0f61921c414",
+    "historyId": "9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle multiple cookie acceptance attempts gracefully",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-13072-worker-2" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765196580239,
+    "stop": 1765196594148,
+    "duration": 13909
+  },
+  {
+    "id": "1e77e67c482f47c4f8c47e89a207d9a9",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-17616-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198752813,
+    "stop": 1765198770278,
+    "duration": 17465
+  },
+  {
+    "id": "e820e6221e3c5c0728f468d4fa60bc1b",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-4700-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765194812939,
+    "stop": 1765194826742,
+    "duration": 13803
+  },
+  {
+    "id": "10427867cbe90b413049b22df9dcf809",
+    "historyId": "72a7fdbdd64ba4083e03bdd0c4a04d3b.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie consent handles multiple acceptance attempts gracefully",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-35432-worker-2" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765196251561,
+    "stop": 1765196269642,
+    "duration": 18081
+  },
+  {
+    "id": "3fb5bdb3201e29a1dfa014f1865a4c25",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1336-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765195140873,
+    "stop": 1765195158532,
+    "duration": 17659
+  },
+  {
+    "id": "df282fd743727667853a788e7dd9c862",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "failed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-24344-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765194774094,
+    "stop": 1765194781829,
+    "duration": 7735
+  },
+  {
+    "id": "c50d50eaa153ba3bc48994ec5fc8f5eb",
+    "historyId": "0c124fb8e7270a0d7818eba8272a0d6a.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Page loads correctly after cookie consent",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-35432-worker-1" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765196251547,
+    "stop": 1765196271013,
+    "duration": 19466
+  },
+  {
+    "id": "0d73ad09ba2662f49867774d7b236134",
+    "historyId": "9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle multiple cookie acceptance attempts gracefully",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-17616-worker-2" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198752830,
+    "stop": 1765198767138,
+    "duration": 14308
+  },
+  {
+    "id": "1f0592b858ca1fc0d336c4dd63ab1b7b",
+    "historyId": "639f240236cbb28a99cf1cd2079b03a3.b444eb0fbe6390c71e68b51dd25701fc",
+    "name": "should register new user via UI and verify user creation via API",
+    "status": "failed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.authentication.userRegistration.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > firefox > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"
+      },
+      { "name": "tag", "value": "critical" },
+      { "name": "tag", "value": "smoke" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-9672-worker-0" },
+      { "name": "parentSuite", "value": "firefox" },
+      { "name": "suite", "value": "ui\\tests\\authentication\\userRegistration.spec.ts" },
+      { "name": "subSuite", "value": "User Registration - UI to API Verification @critical @smoke" }
+    ],
+    "environment": "default",
+    "start": 1765370684048,
+    "stop": 1765370704946,
+    "duration": 20898
+  },
+  {
+    "id": "23f53c92cc522e87e51a57b746ca2518",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "failed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1396-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765194706060,
+    "stop": 1765194717366,
+    "duration": 11306
+  },
+  {
+    "id": "ee24b1a11cf3ba1816f3843fe6a64bb5",
+    "historyId": "c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should load page correctly after automatic cookie handling",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-17616-worker-1" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198752833,
+    "stop": 1765198767204,
+    "duration": 14371
+  },
+  {
+    "id": "c0303158dfa2b198ffe7bf901166605e",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-20468-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765196557099,
+    "stop": 1765196574198,
+    "duration": 17099
+  },
+  {
+    "id": "46669cf38015ee17e2d4a4d8ae8aa355",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1404-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198580214,
+    "stop": 1765198597681,
+    "duration": 17467
+  },
+  {
+    "id": "2a8f50d64b0ebc4fe26150819e2767ef",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-35432-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765196251552,
+    "stop": 1765196275439,
+    "duration": 23887
+  },
+  {
+    "id": "4e6d468176382ebc8ac8e4e51ea30a98",
+    "historyId": "c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should load page correctly after automatic cookie handling",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1404-worker-1" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198580209,
+    "stop": 1765198594939,
+    "duration": 14730
+  },
+  {
+    "id": "0ea05843ea400d1cd6d930783323d4b8",
+    "historyId": "84b9776fe3760e57a42ed9ee5c9d2a82.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should verify navigation elements work after cookie consent",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-17616-worker-4" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198752854,
+    "stop": 1765198767218,
+    "duration": 14364
+  },
+  {
+    "id": "3bab78d8e596ac546c56e4f37c6be9d1",
+    "historyId": "84b9776fe3760e57a42ed9ee5c9d2a82.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should verify navigation elements work after cookie consent",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1404-worker-4" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198580206,
+    "stop": 1765198594915,
+    "duration": 14709
+  },
+  {
+    "id": "8163d3dc52183e2f9387f3795b837895",
+    "historyId": "9e8a226713ea33f90e6eb6265a754f09.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle multiple cookie acceptance attempts gracefully",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1404-worker-2" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198580229,
+    "stop": 1765198594808,
+    "duration": 14579
+  },
+  {
+    "id": "acabfe669ea42d00eb6bb202d54ddde7",
+    "historyId": "b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle cookie consent in iframe context",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-13072-worker-3" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765196580249,
+    "stop": 1765196600209,
+    "duration": 19960
+  },
+  {
+    "id": "337218dd95c28ac2ca38c7d2e4b9dedc",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-13072-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765196580243,
+    "stop": 1765196600072,
+    "duration": 19829
+  },
+  {
+    "id": "2964a76b4c3545e2012b8397c63324d5",
+    "historyId": "21127088cd55c7325cbf079c7ce679e2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display cookie banner and allow acceptance",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-8872-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198553216,
+    "stop": 1765198572910,
+    "duration": 19694
+  },
+  {
+    "id": "f47aa5ca41a8919d1aed7501d0349b51",
+    "historyId": "b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle cookie consent in iframe context",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-1404-worker-3" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198580223,
+    "stop": 1765198597908,
+    "duration": 17685
+  },
+  {
+    "id": "3b9118479734be768e3de52d2e010d7d",
+    "historyId": "b5d6c02188a2b27186d4f5e25d7889e4.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should handle cookie consent in iframe context",
+    "status": "passed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-17616-worker-3" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765198752817,
+    "stop": 1765198770332,
+    "duration": 17515
+  },
+  {
+    "id": "c2d149e04bff9db071feb1e61fcf1e85",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "failed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-21608-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765187117459,
+    "stop": 1765187129886,
+    "duration": 12427
+  },
+  {
+    "id": "cb09ff5c43abfbd053aa762cd2ad2795",
+    "historyId": "c260826d4e90e5902d5c484fb95470c2.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should load page correctly after automatic cookie handling",
+    "status": "passed",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.cookie-consent.cookieBanner.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\cookie-consent\\cookieBanner.spec.ts > Cookie Banner Functionality"
+      },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-13072-worker-1" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\cookie-consent\\cookieBanner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie Banner Functionality" }
+    ],
+    "environment": "default",
+    "start": 1765196580246,
+    "stop": 1765196596297,
+    "duration": 16051
+  },
+  {
+    "id": "3c17a438f2b3051ccc50c86d4f89aa41",
+    "historyId": "79e6b93af864c064e6f187ebbf97f491.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "Cookie banner appears and can be accepted",
+    "status": "broken",
+    "hidden": true,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.cookie-banner.spec.ts" },
+      { "name": "titlePath", "value": " > chromium > ui\\cookie-banner.spec.ts > Cookie banner" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-3224-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\cookie-banner.spec.ts" },
+      { "name": "subSuite", "value": "Cookie banner" }
+    ],
+    "environment": "default",
+    "start": 1765186782679,
+    "stop": 1765186812843,
+    "duration": 30164
+  },
+  {
+    "id": "972502515fa484dfd7489e393aa3edcb",
+    "historyId": "639f240236cbb28a99cf1cd2079b03a3.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should register new user via UI and verify user creation via API",
+    "status": "failed",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.authentication.userRegistration.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"
+      },
+      { "name": "tag", "value": "critical" },
+      { "name": "tag", "value": "smoke" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-9672-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\authentication\\userRegistration.spec.ts" },
+      { "name": "subSuite", "value": "User Registration - UI to API Verification @critical @smoke" }
+    ],
+    "environment": "default",
+    "start": 1765370631741,
+    "stop": 1765370650896,
+    "duration": 19155
+  },
+  {
+    "id": "8ea18fcfba8d99a30112e3026f7ddb47",
+    "historyId": "166ff48bc44687e636e0ed882069aa3d.5bd835b0d6b1d4ada3b9f0db936e82c8",
+    "name": "should display error for duplicate email registration",
+    "status": "broken",
+    "hidden": false,
+    "labels": [
+      { "name": "language", "value": "javascript" },
+      { "name": "framework", "value": "playwright" },
+      { "name": "package", "value": "ui.tests.authentication.userRegistration.spec.ts" },
+      {
+        "name": "titlePath",
+        "value": " > chromium > ui\\tests\\authentication\\userRegistration.spec.ts > User Registration - UI to API Verification @critical @smoke"
+      },
+      { "name": "tag", "value": "critical" },
+      { "name": "tag", "value": "smoke" },
+      { "name": "host", "value": "EPHUDEBW00A3" },
+      { "name": "thread", "value": "pid-9672-worker-0" },
+      { "name": "parentSuite", "value": "chromium" },
+      { "name": "suite", "value": "ui\\tests\\authentication\\userRegistration.spec.ts" },
+      { "name": "subSuite", "value": "User Registration - UI to API Verification @critical @smoke" }
+    ],
+    "environment": "default",
+    "start": 1765370652149,
+    "stop": 1765370682782,
+    "duration": 30633
+  }
+]

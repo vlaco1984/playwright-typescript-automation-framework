@@ -14,20 +14,20 @@ export const environments: Record<string, EnvironmentConfig> = {
     baseUrl: 'https://automationexercise.com/',
     apiBaseUrl: 'https://automationexercise.com/api',
     timeout: 30000,
-    retries: 2
+    retries: 2,
   },
   staging: {
     baseUrl: 'https://staging.automationexercise.com/',
     apiBaseUrl: 'https://staging.automationexercise.com/api',
     timeout: 30000,
-    retries: 3
+    retries: 3,
   },
   development: {
     baseUrl: 'http://localhost:3000/',
     apiBaseUrl: 'http://localhost:3000/api',
     timeout: 15000,
-    retries: 1
-  }
+    retries: 1,
+  },
 };
 
 export function getEnvironment(): EnvironmentConfig {
