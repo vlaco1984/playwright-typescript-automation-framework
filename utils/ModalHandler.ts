@@ -153,13 +153,30 @@ export class ModalHandler {
   /**
    * Handle modal if present (graceful approach)
    * Returns silently if modal doesn't exist
+   * Removes modal from DOM if visible to ensure no overlay blocking
    * @param config Modal configuration
    */
   async handleModalIfPresent(config: ModalConfig = ModalHandler.FUNNY_CONSENT): Promise<void> {
     try {
       const isVisible = await this.isModalVisible(config);
       if (isVisible) {
-        await this.closeModal(config);
+        // First try closing via button
+        const closed = await this.closeModal(config);
+        
+        // If button click failed, forcefully remove from DOM
+        if (!closed) {
+          try {
+            await this.page.evaluate((selector) => {
+              const element = document.querySelector(selector);
+              if (element) {
+                element.remove();
+                console.log('Modal forcefully removed from DOM');
+              }
+            }, config.rootSelector);
+          } catch (e) {
+            // Silently ignore DOM manipulation failures
+          }
+        }
       }
     } catch {
       // Silently ignore if modal handling fails

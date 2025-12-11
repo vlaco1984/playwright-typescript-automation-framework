@@ -125,12 +125,15 @@ export class RegistrationPage extends BasePage {
     this.stateInput = page
       .locator('input[data-qa="state"]')
       .or(page.locator('input[placeholder="State *"]'));
+    // City field has combined placeholder "City * Zipcode *"
     this.cityInput = page
       .locator('input[data-qa="city"]')
       .or(page.locator('input[placeholder*="City"]'));
+    // Zipcode is a separate input field - use data-qa selector specifically
     this.zipcodeInput = page
       .locator('input[data-qa="zipcode"]')
-      .or(page.locator('input[placeholder="Zipcode *"]'));
+      .or(page.locator('input#zipcode'))
+      .or(page.locator('input[name="zipcode"]'))
     this.mobileNumberInput = page
       .locator('input[data-qa="mobile_number"]')
       .or(page.locator('input[placeholder="Mobile Number *"]'));
@@ -193,8 +196,47 @@ export class RegistrationPage extends BasePage {
     // Wait for Signup button to be clickable
     await this.signupButton.waitFor({ state: 'visible', timeout: 10000 });
 
-    // Click signup button
-    await this.signupButton.click({ timeout: 10000 });
+    // Handle any blocking modals before clicking
+    try {
+      const modalRoot = this.page.locator('.fc-consent-root, .fc-dialog-container');
+      const isModalVisible = await modalRoot.isVisible({ timeout: 1000 }).catch(() => false);
+
+      if (isModalVisible) {
+        console.log('🔴 Modal blocking signup button, attempting to dismiss...');
+
+        // Try multiple strategies to close the modal
+        const consentBtn = this.page.locator('.fc-cta-consent, .fc-button');
+        try {
+          await consentBtn.first().click({ force: true, timeout: 2000 });
+          await new Promise((r) => setTimeout(r, 300));
+          console.log('✅ Modal dismissed via consent button');
+        } catch {
+          // If button click fails, try to hide the modal with CSS
+          try {
+            await this.page.evaluate(() => {
+              const modal = document.querySelector('.fc-consent-root');
+              if (modal) {
+                (modal as HTMLElement).style.display = 'none';
+              }
+            });
+            console.log('✅ Modal hidden via CSS');
+          } catch {
+            console.log('⚠️  Could not close modal, attempting forced button click anyway');
+          }
+        }
+      }
+    } catch {
+      // If modal check fails, continue anyway
+    }
+
+    // Click signup button (using force if needed to bypass any remaining overlays)
+    try {
+      await this.signupButton.click({ timeout: 10000 });
+    } catch (error) {
+      // If normal click fails, try with force
+      console.log('Normal click failed, attempting forced click...');
+      await this.signupButton.click({ force: true, timeout: 10000 });
+    }
 
     // Wait for page navigation to happen (not networkidle, as page is never fully idle)
     await this.page.waitForLoadState('domcontentloaded', { timeout: 15000 }).catch(() => {});
@@ -233,6 +275,7 @@ export class RegistrationPage extends BasePage {
 
     // Close consent modal if present before filling form - CRITICAL
     await this.handleModalIfPresent();
+    await new Promise((r) => setTimeout(r, 300));
 
     // Wait for title radio button to be visible and stable
     await this.titleMrRadio.waitFor({ state: 'visible', timeout: 5000 });
@@ -327,8 +370,8 @@ export class RegistrationPage extends BasePage {
     // Scroll to Create Account button to ensure it's visible and not obscured by ads
     await this.createAccountButton.scrollIntoViewIfNeeded();
 
-    // Wait for the Create Account button to be visible and attached before clicking
-    await this.createAccountButton.waitFor({ state: 'visible', timeout: 10000 });
+    // Wait briefly for any dynamic ads to finish loading/repositioning
+    await this.page.waitForTimeout(500);
 
     // Click the Create Account button - uses actionability checks to avoid clicking ads
     await this.createAccountButton.click({ timeout: 10000 });

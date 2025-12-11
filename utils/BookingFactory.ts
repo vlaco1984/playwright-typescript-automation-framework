@@ -45,10 +45,9 @@ export class BookingFactory {
 
   /**
    * Creates a valid booking object with random data
-   * @param customizedFields Optional fields to customize the booking
    * @returns A complete booking object
    */
-  static createBooking(customizedFields?: Partial<Booking>): Booking {
+  static createBooking(overrides?: Partial<Booking>): Booking {
     const checkinDate = this.generateFutureDate();
     const checkoutDate = this.generateFutureDate(checkinDate);
 
@@ -64,15 +63,14 @@ export class BookingFactory {
       additionalneeds: this.getRandomElement(this.ADDITIONAL_NEEDS),
     };
 
-    return { ...booking, ...customizedFields };
+    return { ...booking, ...overrides };
   }
 
   /**
    * Creates a booking with minimal required fields
-   * @param customizedFields Optional fields to customize the booking
    * @returns A booking with only required fields
    */
-  static createMinimalBooking(customizedFields?: Partial<Booking>): Booking {
+  static createMinimalBooking(overrides?: Partial<Booking>): Booking {
     const checkinDate = this.generateFutureDate();
     const checkoutDate = this.generateFutureDate(checkinDate);
 
@@ -87,7 +85,7 @@ export class BookingFactory {
       },
     };
 
-    return { ...booking, ...customizedFields };
+    return { ...booking, ...overrides };
   }
 
   /**
@@ -158,7 +156,7 @@ export class BookingFactory {
     const { MIN_FUTURE_DAYS, CHECKOUT_DAYS_AFTER_CHECKIN, MAX_FUTURE_DAYS } =
       TEST_DATA_CONSTANTS.VALIDATION.DATE;
 
-    const minDays = MIN_FUTURE_DAYS;
+    const minDays = afterDate ? MIN_FUTURE_DAYS : MIN_FUTURE_DAYS;
     const maxDays = afterDate ? CHECKOUT_DAYS_AFTER_CHECKIN : MAX_FUTURE_DAYS;
     const randomDays = Math.floor(Math.random() * (maxDays - minDays + 1)) + minDays;
 
