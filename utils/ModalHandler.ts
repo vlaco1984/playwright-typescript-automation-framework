@@ -162,7 +162,7 @@ export class ModalHandler {
       if (isVisible) {
         // First try closing via button
         const closed = await this.closeModal(config);
-        
+
         // If button click failed, forcefully remove from DOM
         if (!closed) {
           try {
@@ -173,7 +173,7 @@ export class ModalHandler {
                 console.log('Modal forcefully removed from DOM');
               }
             }, config.rootSelector);
-            } catch {
+          } catch {
             // Silently ignore DOM manipulation failures
           }
         }

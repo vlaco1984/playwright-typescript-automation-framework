@@ -10,13 +10,15 @@ test.describe('Negative Scenarios and Error Handling', () => {
   test('Invalid email format should show error on login', async ({ page }) => {
     // Clear session cookies to ensure fresh login
     const cookies = await page.context().cookies();
-    const sessionCookies = cookies.filter(c => c.name.toLowerCase().includes('session') || c.name === 'PHPSESSID');
+    const sessionCookies = cookies.filter(
+      (c) => c.name.toLowerCase().includes('session') || c.name === 'PHPSESSID',
+    );
     if (sessionCookies.length > 0) {
       await page.context().clearCookies({ name: sessionCookies[0].name });
     }
-    
+
     const modalHandler = new ModalHandler(page);
-    
+
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
@@ -39,7 +41,7 @@ test.describe('Negative Scenarios and Error Handling', () => {
 
   test('Empty login fields should not allow submission', async ({ page }) => {
     const modalHandler = new ModalHandler(page);
-    
+
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
@@ -59,7 +61,7 @@ test.describe('Negative Scenarios and Error Handling', () => {
 
   test('Duplicate email registration should show error', async ({ page }) => {
     const modalHandler = new ModalHandler(page);
-    
+
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
@@ -73,7 +75,9 @@ test.describe('Negative Scenarios and Error Handling', () => {
     await page.waitForLoadState('domcontentloaded');
 
     // Should show error about email already existing
-    const errorMessage = page.locator('[data-qa="signup-error"], .error, p:has-text("already")').first();
+    const errorMessage = page
+      .locator('[data-qa="signup-error"], .error, p:has-text("already")')
+      .first();
     const hasError = await errorMessage.isVisible().catch(() => false);
 
     expect(hasError || !page.url().includes('/signup')).toBeTruthy();
@@ -84,7 +88,9 @@ test.describe('Negative Scenarios and Error Handling', () => {
     await page.goto('/product/99999');
 
     // Should either redirect or show error
-    const notFoundMessage = page.locator('[data-qa*="not"], h1:has-text("not found"), p:has-text("not available")').first();
+    const notFoundMessage = page
+      .locator('[data-qa*="not"], h1:has-text("not found"), p:has-text("not available")')
+      .first();
     const hasNotFoundMessage = await notFoundMessage.isVisible().catch(() => false);
 
     expect(hasNotFoundMessage || !page.url().includes('/product/99999')).toBeTruthy();
@@ -92,7 +98,7 @@ test.describe('Negative Scenarios and Error Handling', () => {
 
   test('Accessing checkout without login should redirect', async ({ page }) => {
     const modalHandler = new ModalHandler(page);
-    
+
     // Try to access checkout without login
     await page.goto('/checkout');
     await page.waitForLoadState('domcontentloaded');
@@ -103,10 +109,17 @@ test.describe('Negative Scenarios and Error Handling', () => {
     // 2. On checkout page (guest checkout allowed)
     const isOnLogin = page.url().includes('/login');
     const isOnCheckout = page.url().includes('/checkout');
-    const loginForm = await page.locator('form').filter({ hasText: 'Login' }).isVisible({ timeout: 2000 }).catch(() => false);
-    const checkoutForm = await page.locator('heading:has-text("Address Details"), h2:has-text("Address Details")').isVisible({ timeout: 2000 }).catch(() => false);
+    const loginForm = await page
+      .locator('form')
+      .filter({ hasText: 'Login' })
+      .isVisible({ timeout: 2000 })
+      .catch(() => false);
+    const checkoutForm = await page
+      .locator('heading:has-text("Address Details"), h2:has-text("Address Details")')
+      .isVisible({ timeout: 2000 })
+      .catch(() => false);
 
-    expect((isOnLogin || loginForm) || (isOnCheckout && checkoutForm)).toBeTruthy();
+    expect(isOnLogin || loginForm || (isOnCheckout && checkoutForm)).toBeTruthy();
   });
 
   test('Payment with invalid card should show error', async ({ page }) => {
@@ -123,16 +136,22 @@ test.describe('Negative Scenarios and Error Handling', () => {
       await cardInput.fill('0000000000000000');
 
       // Look for submit button
-      const submitBtn = page.locator('button:has-text("Place Order"), button:has-text("Pay")').first();
+      const submitBtn = page
+        .locator('button:has-text("Place Order"), button:has-text("Pay")')
+        .first();
       if (await submitBtn.isVisible().catch(() => false)) {
         await submitBtn.click();
         await page.waitForLoadState('domcontentloaded');
 
         // Should show error or stay on payment page
-        const errorMessage = page.locator('[data-qa*="error"], .error, p:has-text("invalid")').first();
+        const errorMessage = page
+          .locator('[data-qa*="error"], .error, p:has-text("invalid")')
+          .first();
         const hasError = await errorMessage.isVisible().catch(() => false);
 
-        expect(hasError || page.url().includes('checkout') || page.url().includes('payment')).toBeTruthy();
+        expect(
+          hasError || page.url().includes('checkout') || page.url().includes('payment'),
+        ).toBeTruthy();
       }
     }
   });

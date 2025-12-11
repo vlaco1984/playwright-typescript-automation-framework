@@ -26,7 +26,9 @@ test.describe('Shopping Cart and Purchase Flow', () => {
     expect(productVisible).toBeTruthy();
 
     // Find add to cart button
-    const addToCartButton = firstProduct.locator('a:has-text("Add to cart"), button:has-text("Add")').first();
+    const addToCartButton = firstProduct
+      .locator('a:has-text("Add to cart"), button:has-text("Add")')
+      .first();
     const addToCartVisible = await addToCartButton.isVisible().catch(() => false);
 
     if (addToCartVisible) {
@@ -34,9 +36,17 @@ test.describe('Shopping Cart and Purchase Flow', () => {
       await page.waitForTimeout(1000);
 
       // Check for confirmation (modal, message, or cart count update)
-      const continueShoppingBtn = page.locator('button:has-text("Continue Shopping"), a:has-text("Continue")').first();
+      const continueShoppingBtn = page
+        .locator('button:has-text("Continue Shopping"), a:has-text("Continue")')
+        .first();
       const confirmVisible = await continueShoppingBtn.isVisible().catch(() => false);
-      expect(confirmVisible || await page.locator('.cart-count').isVisible().catch(() => false)).toBeTruthy();
+      expect(
+        confirmVisible ||
+          (await page
+            .locator('.cart-count')
+            .isVisible()
+            .catch(() => false)),
+      ).toBeTruthy();
 
       // Close modal if present
       if (confirmVisible) {
@@ -69,7 +79,11 @@ test.describe('Shopping Cart and Purchase Flow', () => {
     await page.waitForLoadState('domcontentloaded');
 
     // Find checkout button
-    const checkoutButton = page.locator('a[href*="checkout"], button:has-text("Proceed to Checkout"), a:has-text("Checkout")').first();
+    const checkoutButton = page
+      .locator(
+        'a[href*="checkout"], button:has-text("Proceed to Checkout"), a:has-text("Checkout")',
+      )
+      .first();
     const checkoutVisible = await checkoutButton.isVisible().catch(() => false);
 
     if (checkoutVisible) {
@@ -87,7 +101,9 @@ test.describe('Shopping Cart and Purchase Flow', () => {
     await page.waitForLoadState('domcontentloaded');
 
     // Check for empty cart message
-    const emptyMessage = page.locator('p:has-text("Cart is empty"), b:has-text("Cart is Empty"), [data-qa*="empty"]').first();
+    const emptyMessage = page
+      .locator('p:has-text("Cart is empty"), b:has-text("Cart is Empty"), [data-qa*="empty"]')
+      .first();
     const isEmpty = await emptyMessage.isVisible().catch(() => false);
 
     // Either empty message or cart table is visible
@@ -137,7 +153,9 @@ test.describe('Shopping Cart and Purchase Flow', () => {
     await page.waitForLoadState('domcontentloaded');
 
     // Find quantity input
-    const quantityInput = page.locator('input[data-qa="quantity"], input.cart_quantity_input').first();
+    const quantityInput = page
+      .locator('input[data-qa="quantity"], input.cart_quantity_input')
+      .first();
     const quantityVisible = await quantityInput.isVisible().catch(() => false);
 
     if (quantityVisible) {
@@ -175,7 +193,9 @@ test.describe('Shopping Cart and Purchase Flow', () => {
     await page.waitForLoadState('domcontentloaded');
 
     // Check for total price
-    const totalPrice = page.locator('#summary_table td.cart_total, [data-qa*="total"], b:has-text("Total")').first();
+    const totalPrice = page
+      .locator('#summary_table td.cart_total, [data-qa*="total"], b:has-text("Total")')
+      .first();
     const totalVisible = await totalPrice.isVisible().catch(() => false);
 
     // Either total is visible or we're on cart page

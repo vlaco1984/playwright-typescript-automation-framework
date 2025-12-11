@@ -73,7 +73,7 @@ test.describe('Booking API - Negative Scenarios', () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': `token=${token}`,
+        Cookie: `token=${token}`,
       },
       body: JSON.stringify({
         firstname: 'Test',
@@ -98,7 +98,7 @@ test.describe('Booking API - Negative Scenarios', () => {
     const response = await fetch(`https://restful-booker.herokuapp.com/booking/${invalidId}`, {
       method: 'DELETE',
       headers: {
-        'Cookie': `token=${token}`,
+        Cookie: `token=${token}`,
       },
     });
 
@@ -222,7 +222,7 @@ test.describe('Booking API - Negative Scenarios', () => {
         checkin: '2025-01-01',
         checkout: '2025-01-05',
       },
-        additionalneeds: '\'; DROP TABLE bookings; --',
+      additionalneeds: "'; DROP TABLE bookings; --",
     };
 
     const response = await fetch('https://restful-booker.herokuapp.com/booking', {

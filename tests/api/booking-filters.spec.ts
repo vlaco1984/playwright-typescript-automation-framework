@@ -43,7 +43,7 @@ test.describe('Booking API - Filters and Queries', () => {
     console.log(`✓ Retrieved ${data.length} total bookings`);
 
     // Each item should have a bookingid
-      data.slice(0, 5).forEach((booking: BookingResult) => {
+    data.slice(0, 5).forEach((booking: BookingResult) => {
       expect(booking.bookingid).toBeTruthy();
     });
   });
@@ -79,7 +79,7 @@ test.describe('Booking API - Filters and Queries', () => {
     console.log(`✓ Found ${results.length} booking(s) with firstname: ${uniqueName}`);
 
     // Verify at least one result matches
-      const bookingIds = results.map((r: BookingResult) => r.bookingid);
+    const bookingIds = results.map((r: BookingResult) => r.bookingid);
     expect(bookingIds).toContain(created.bookingid);
   });
 
@@ -246,7 +246,7 @@ test.describe('Booking API - Filters and Queries', () => {
 
   test('Filter with special characters in query', async () => {
     const response = await fetch(
-      'https://restful-booker.herokuapp.com/booking?firstname=O\'Brien&lastname=Smith',
+      "https://restful-booker.herokuapp.com/booking?firstname=O'Brien&lastname=Smith",
     );
 
     expect(response.status).toBe(200);

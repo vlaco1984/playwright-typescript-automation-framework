@@ -71,7 +71,7 @@ test.describe('Site Navigation Tests', () => {
     // Click cart link from header
     const cartLink = page.locator('a:has-text("Cart")').first();
     const isVisible = await cartLink.isVisible({ timeout: 2000 }).catch(() => false);
-    
+
     if (isVisible) {
       await cartLink.click();
       await page.waitForLoadState('domcontentloaded', { timeout: 15000 });

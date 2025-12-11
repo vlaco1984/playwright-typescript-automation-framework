@@ -44,7 +44,9 @@ export const test = base.extend<ModalFixtures>({
 
             // Strategy 2: Force click on any consent button
             try {
-              const consentBtn = page.locator('.fc-cta-consent, [data-qa="accept-consent"], .fc-button');
+              const consentBtn = page.locator(
+                '.fc-cta-consent, [data-qa="accept-consent"], .fc-button',
+              );
               const btnVisible = await consentBtn.isVisible({ timeout: 1000 }).catch(() => false);
 
               if (btnVisible) {
@@ -52,7 +54,7 @@ export const test = base.extend<ModalFixtures>({
                 await new Promise((r) => setTimeout(r, 300));
                 console.log('✅ Alternative consent button clicked');
               }
-              } catch {
+            } catch {
               console.log('⚠️  Alternative strategy also failed');
             }
 
@@ -71,7 +73,10 @@ export const test = base.extend<ModalFixtures>({
           }
         }
       } catch (error) {
-        console.log('Modal handling error:', error instanceof Error ? error.message.substring(0, 100) : 'unknown');
+        console.log(
+          'Modal handling error:',
+          error instanceof Error ? error.message.substring(0, 100) : 'unknown',
+        );
       }
     };
 

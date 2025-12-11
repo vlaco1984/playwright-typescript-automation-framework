@@ -31,7 +31,7 @@ test.describe('Product Catalog E2E Tests', () => {
     // Find first product
     const productLink = page.locator('a:has-text("View Product")').first();
     const isVisible = await productLink.isVisible({ timeout: 2000 }).catch(() => false);
-    
+
     if (isVisible) {
       await productLink.click();
       await page.waitForLoadState('domcontentloaded', { timeout: 15000 });
@@ -45,8 +45,12 @@ test.describe('Product Catalog E2E Tests', () => {
     await page.goto('/products');
 
     // Find search input
-    const searchInput = page.locator('input[type="text"][placeholder*="search"], [data-qa="search-input"]').first();
-    const searchButton = page.locator('button:has-text("Search"), [data-qa="search-button"]').first();
+    const searchInput = page
+      .locator('input[type="text"][placeholder*="search"], [data-qa="search-input"]')
+      .first();
+    const searchButton = page
+      .locator('button:has-text("Search"), [data-qa="search-button"]')
+      .first();
 
     if (await searchInput.isVisible({ timeout: 2000 }).catch(() => false)) {
       // Type search term
@@ -101,7 +105,9 @@ test.describe('Product Catalog E2E Tests', () => {
     await page.goto('/products');
 
     // Look for pagination controls
-    const nextPageButton = page.locator('a:has-text("Next"), button:has-text("Next"), [aria-label*="next"]');
+    const nextPageButton = page.locator(
+      'a:has-text("Next"), button:has-text("Next"), [aria-label*="next"]',
+    );
 
     const hasNextButton = await nextPageButton.isVisible({ timeout: 2000 }).catch(() => false);
 
@@ -136,7 +142,9 @@ test.describe('Product Catalog E2E Tests', () => {
     await page.goto('/products');
 
     // Look for sort dropdown
-    const sortDropdown = page.locator('select[name*="sort"], [data-qa="sort-by"], a:has-text("Sort")');
+    const sortDropdown = page.locator(
+      'select[name*="sort"], [data-qa="sort-by"], a:has-text("Sort")',
+    );
 
     if (await sortDropdown.isVisible({ timeout: 2000 }).catch(() => false)) {
       // Select sort option
@@ -157,7 +165,9 @@ test.describe('Product Catalog E2E Tests', () => {
     await page.goto('/products');
 
     // Look for review elements
-    const reviews = page.locator('[data-qa*="review"], .fa-star, [aria-label*="star"], [title*="rating"]');
+    const reviews = page.locator(
+      '[data-qa*="review"], .fa-star, [aria-label*="star"], [title*="rating"]',
+    );
     const reviewCount = await reviews.count();
 
     if (reviewCount > 0) {
@@ -175,7 +185,9 @@ test.describe('Product Catalog E2E Tests', () => {
     await firstProduct.click();
 
     // Look for related products section
-    const relatedSection = page.locator('text=/related|you may also|recommended/i', { has: page.locator('.product-image-wrapper') });
+    const relatedSection = page.locator('text=/related|you may also|recommended/i', {
+      has: page.locator('.product-image-wrapper'),
+    });
 
     const hasRelated = await relatedSection.isVisible({ timeout: 3000 }).catch(() => false);
 
@@ -194,7 +206,9 @@ test.describe('Product Catalog E2E Tests', () => {
     await firstProduct.click();
 
     // Get product description
-    const description = page.locator('text=/description|details|about/i, [data-qa="product-description"]');
+    const description = page.locator(
+      'text=/description|details|about/i, [data-qa="product-description"]',
+    );
 
     const hasDescription = await description.isVisible({ timeout: 3000 }).catch(() => false);
 

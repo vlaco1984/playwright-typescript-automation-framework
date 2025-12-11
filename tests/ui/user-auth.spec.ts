@@ -26,7 +26,7 @@ test.describe('User Authentication E2E Tests', () => {
     // Navigate to signup
     await page.goto('/login');
     await modalHandler.handleModalIfPresent();
-    
+
     // Fill signup form on /login page FIRST
     const signupFormAuth = page.locator('form').filter({ hasText: 'Signup' });
     await signupFormAuth.getByPlaceholder('Name').fill(userDetails.name);
@@ -52,11 +52,26 @@ test.describe('User Authentication E2E Tests', () => {
     await passwordInput.fill(userDetails.password);
 
     // Fill address fields using role-based selectors
-    await page.getByRole('textbox', { name: /Address.*Street/ }).fill('123 Test Street').catch(() => {});
-    await page.getByRole('textbox', { name: 'State *' }).fill('TestState').catch(() => {});
-    await page.getByRole('textbox', { name: /City/ }).fill('TestCity').catch(() => {});
-    await page.locator('input[name="zipcode"]').fill('12345').catch(() => {});
-    await page.getByRole('textbox', { name: 'Mobile Number *' }).fill('1234567890').catch(() => {});
+    await page
+      .getByRole('textbox', { name: /Address.*Street/ })
+      .fill('123 Test Street')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'State *' })
+      .fill('TestState')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: /City/ })
+      .fill('TestCity')
+      .catch(() => {});
+    await page
+      .locator('input[name="zipcode"]')
+      .fill('12345')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'Mobile Number *' })
+      .fill('1234567890')
+      .catch(() => {});
 
     // Submit registration
     const createButton = page.getByRole('button', { name: /Create Account/i });
@@ -91,14 +106,14 @@ test.describe('User Authentication E2E Tests', () => {
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
-    
+
     // Wait for login form to be visible (not logged in anymore)
     await page.waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 10000 });
     await page.waitForTimeout(1000);
 
     // Find and fill login email
     const loginForm = page.locator('form').filter({ hasText: 'Login' });
-    
+
     // Verify form is accessible
     const formVisible = await loginForm.isVisible({ timeout: 3000 }).catch(() => false);
     if (!formVisible) {
@@ -106,9 +121,11 @@ test.describe('User Authentication E2E Tests', () => {
       await page.goto('/login');
       await page.waitForLoadState('domcontentloaded');
       await modalHandler.handleModalIfPresent();
-      await page.waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 10000 });
+      await page.waitForSelector('form:has(input[placeholder="Email Address"])', {
+        timeout: 10000,
+      });
     }
-    
+
     const loginEmailInput = loginForm.getByPlaceholder('Email Address');
     const loginPasswordInput = loginForm.getByPlaceholder('Password');
     const loginButton = page.getByRole('button', { name: 'Login' });
@@ -117,16 +134,19 @@ test.describe('User Authentication E2E Tests', () => {
     await loginEmailInput.fill(userDetails.email);
     await loginPasswordInput.fill(userDetails.password);
     await loginButton.click();
-    
+
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1000);
     await modalHandler.handleModalIfPresent();
 
     // Verify login success - check for logged-in indicator
-    const logoutLink = page.locator('a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")');
-    const isLoggedIn = await logoutLink.isVisible({ timeout: 5000 }).catch(() => false) || 
-                       page.url().includes('/account') || 
-                       page.url().includes('/user');
+    const logoutLink = page.locator(
+      'a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")',
+    );
+    const isLoggedIn =
+      (await logoutLink.isVisible({ timeout: 5000 }).catch(() => false)) ||
+      page.url().includes('/account') ||
+      page.url().includes('/user');
     expect(isLoggedIn).toBeTruthy();
 
     console.log('✓ Successfully logged in with registered credentials');
@@ -179,11 +199,26 @@ test.describe('User Authentication E2E Tests', () => {
     await page.getByRole('textbox', { name: 'First name *' }).fill(userDetails.firstName || 'Test');
     await page.getByRole('textbox', { name: 'Last name *' }).fill(userDetails.lastName || 'User');
     await page.locator('input[type="password"]').first().fill(userDetails.password);
-    await page.getByRole('textbox', { name: /Address.*Street/ }).fill('123 Test Street').catch(() => {});
-    await page.getByRole('textbox', { name: 'State *' }).fill('TestState').catch(() => {});
-    await page.getByRole('textbox', { name: /City/ }).fill('TestCity').catch(() => {});
-    await page.locator('input[name="zipcode"]').fill('12345').catch(() => {});
-    await page.getByRole('textbox', { name: 'Mobile Number *' }).fill('1234567890').catch(() => {});
+    await page
+      .getByRole('textbox', { name: /Address.*Street/ })
+      .fill('123 Test Street')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'State *' })
+      .fill('TestState')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: /City/ })
+      .fill('TestCity')
+      .catch(() => {});
+    await page
+      .locator('input[name="zipcode"]')
+      .fill('12345')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'Mobile Number *' })
+      .fill('1234567890')
+      .catch(() => {});
 
     // Submit registration
     const createButton = page.getByRole('button', { name: /Create Account/i });
@@ -201,15 +236,18 @@ test.describe('User Authentication E2E Tests', () => {
     await page.waitForTimeout(1000);
 
     // Wait for logout link to be visible (indicates we're logged in)
-    const logoutLinkVerify = page.locator('a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")');
+    const logoutLinkVerify = page.locator(
+      'a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")',
+    );
     await logoutLinkVerify.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {
       console.log('Logout link not found after registration');
     });
 
     // Verify we're logged in (logout link or account page indicator)
-    const isLoggedIn = await logoutLinkVerify.isVisible({ timeout: 2000 }).catch(() => false) ||
-                       page.url().includes('/account') ||
-                       page.url().includes('/user');
+    const isLoggedIn =
+      (await logoutLinkVerify.isVisible({ timeout: 2000 }).catch(() => false)) ||
+      page.url().includes('/account') ||
+      page.url().includes('/user');
     expect(isLoggedIn).toBeTruthy();
 
     console.log('✓ Logged in - logout link visible');
@@ -251,11 +289,26 @@ test.describe('User Authentication E2E Tests', () => {
     await page.getByRole('textbox', { name: 'First name *' }).fill(userDetails.firstName || 'Test');
     await page.getByRole('textbox', { name: 'Last name *' }).fill(userDetails.lastName || 'User');
     await page.locator('input[type="password"]').first().fill(userDetails.password);
-    await page.getByRole('textbox', { name: /Address.*Street/ }).fill('123 Test Street').catch(() => {});
-    await page.getByRole('textbox', { name: 'State *' }).fill('TestState').catch(() => {});
-    await page.getByRole('textbox', { name: /City/ }).fill('TestCity').catch(() => {});
-    await page.locator('input[name="zipcode"]').fill('12345').catch(() => {});
-    await page.getByRole('textbox', { name: 'Mobile Number *' }).fill('1234567890').catch(() => {});
+    await page
+      .getByRole('textbox', { name: /Address.*Street/ })
+      .fill('123 Test Street')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'State *' })
+      .fill('TestState')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: /City/ })
+      .fill('TestCity')
+      .catch(() => {});
+    await page
+      .locator('input[name="zipcode"]')
+      .fill('12345')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'Mobile Number *' })
+      .fill('1234567890')
+      .catch(() => {});
 
     // Submit registration
     const createButton = page.getByRole('button', { name: /Create Account/i });
@@ -271,10 +324,13 @@ test.describe('User Authentication E2E Tests', () => {
     }
 
     // Verify still logged in by checking for logout link or account page indicator
-    const logoutLinkSession = page.locator('a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")');
-    const isLoggedInSession = await logoutLinkSession.isVisible({ timeout: 5000 }).catch(() => false) ||
-                              page.url().includes('/account') ||
-                              page.url().includes('/user');
+    const logoutLinkSession = page.locator(
+      'a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")',
+    );
+    const isLoggedInSession =
+      (await logoutLinkSession.isVisible({ timeout: 5000 }).catch(() => false)) ||
+      page.url().includes('/account') ||
+      page.url().includes('/user');
     expect(isLoggedInSession).toBeTruthy();
 
     console.log('✓ Session persisted across navigation');
@@ -294,7 +350,7 @@ test.describe('User Authentication E2E Tests', () => {
     // Verify we're at login page OR still have session (test will pass either way)
     const pageUrl = page.url();
     const isLoginPage = pageUrl.includes('/login') || isAtLogin;
-    
+
     // If not at login, check if it's because we're still in session (page exists)
     const pageExists = !pageUrl.includes('404') && !pageUrl.includes('not-found');
     expect(isLoginPage || pageExists).toBeTruthy();
@@ -324,11 +380,26 @@ test.describe('User Authentication E2E Tests', () => {
     await page.getByRole('textbox', { name: 'First name *' }).fill(userDetails.firstName || 'Test');
     await page.getByRole('textbox', { name: 'Last name *' }).fill(userDetails.lastName || 'User');
     await page.locator('input[type="password"]').first().fill(userDetails.password);
-    await page.getByRole('textbox', { name: /Address.*Street/ }).fill('123 Test Street').catch(() => {});
-    await page.getByRole('textbox', { name: 'State *' }).fill('TestState').catch(() => {});
-    await page.getByRole('textbox', { name: /City/ }).fill('TestCity').catch(() => {});
-    await page.locator('input[name="zipcode"]').fill('12345').catch(() => {});
-    await page.getByRole('textbox', { name: 'Mobile Number *' }).fill('1234567890').catch(() => {});
+    await page
+      .getByRole('textbox', { name: /Address.*Street/ })
+      .fill('123 Test Street')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'State *' })
+      .fill('TestState')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: /City/ })
+      .fill('TestCity')
+      .catch(() => {});
+    await page
+      .locator('input[name="zipcode"]')
+      .fill('12345')
+      .catch(() => {});
+    await page
+      .getByRole('textbox', { name: 'Mobile Number *' })
+      .fill('1234567890')
+      .catch(() => {});
 
     // Submit registration
     const createButton = page.getByRole('button', { name: /Create Account/i });
@@ -346,9 +417,11 @@ test.describe('User Authentication E2E Tests', () => {
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
-    
+
     // Wait for login form to appear
-    await page.waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 5000 }).catch(() => null);
+    await page
+      .waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 5000 })
+      .catch(() => null);
     await page.waitForTimeout(500);
 
     // Ensure we're logged out before attempting login
@@ -370,7 +443,9 @@ test.describe('User Authentication E2E Tests', () => {
     await loginEmailInputRemember.fill(userDetails.email);
     await loginPasswordInputRemember.fill(userDetails.password);
 
-    const rememberMeExists = await rememberMeCheckbox.isVisible({ timeout: 1000 }).catch(() => false);
+    const rememberMeExists = await rememberMeCheckbox
+      .isVisible({ timeout: 1000 })
+      .catch(() => false);
     if (rememberMeExists) {
       await rememberMeCheckbox.check();
       console.log('✓ Remember me checkbox checked');
@@ -380,10 +455,13 @@ test.describe('User Authentication E2E Tests', () => {
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
 
-    const logoutAfter = page.locator('a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")');
-    const isLoggedInAfter = await logoutAfter.isVisible({ timeout: 5000 }).catch(() => false) ||
-                            page.url().includes('/account') ||
-                            page.url().includes('/user');
+    const logoutAfter = page.locator(
+      'a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")',
+    );
+    const isLoggedInAfter =
+      (await logoutAfter.isVisible({ timeout: 5000 }).catch(() => false)) ||
+      page.url().includes('/account') ||
+      page.url().includes('/user');
     expect(isLoggedInAfter).toBeTruthy();
 
     console.log('✓ Login successful with remember me option');
@@ -418,7 +496,7 @@ test.describe('User Authentication E2E Tests', () => {
 
     const nameInput = page.locator('input[data-qa="signup-name"]');
     const emailInput = page.locator('input[data-qa="signup-email"]');
-    
+
     await nameInput.fill(userDetails.name);
     await emailInput.fill(userDetails.email);
 
@@ -448,9 +526,11 @@ test.describe('User Authentication E2E Tests', () => {
     await page.goto('/login');
     await page.waitForLoadState('domcontentloaded');
     await modalHandler.handleModalIfPresent();
-    
+
     // Wait for login form to appear
-    await page.waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 5000 }).catch(() => null);
+    await page
+      .waitForSelector('form:has(input[placeholder="Email Address"])', { timeout: 5000 })
+      .catch(() => null);
     await page.waitForTimeout(500);
 
     // Login with spaces around email
@@ -466,10 +546,13 @@ test.describe('User Authentication E2E Tests', () => {
     await modalHandler.handleModalIfPresent();
 
     // Should still login successfully (spaces trimmed)
-    const logoutAfterSpaces = page.locator('a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")');
-    const isLoggedInSpaces = await logoutAfterSpaces.isVisible({ timeout: 5000 }).catch(() => false) ||
-                             page.url().includes('/account') ||
-                             page.url().includes('/user');
+    const logoutAfterSpaces = page.locator(
+      'a[href*="/logout"], a:has-text("Logout"), a:has-text("Sign out")',
+    );
+    const isLoggedInSpaces =
+      (await logoutAfterSpaces.isVisible({ timeout: 5000 }).catch(() => false)) ||
+      page.url().includes('/account') ||
+      page.url().includes('/user');
 
     if (isLoggedInSpaces) {
       console.log('✓ Email spaces are properly trimmed during login');

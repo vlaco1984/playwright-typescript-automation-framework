@@ -123,9 +123,7 @@ test.describe('Booking API - Authentication Tests', () => {
     await bookingService.deleteBooking(bookingId);
 
     // Verify deletion
-    const response = await fetch(
-      `https://restful-booker.herokuapp.com/booking/${bookingId}`,
-    );
+    const response = await fetch(`https://restful-booker.herokuapp.com/booking/${bookingId}`);
     expect(response.status).toBe(404);
 
     console.log('✓ Token successfully used to delete booking');

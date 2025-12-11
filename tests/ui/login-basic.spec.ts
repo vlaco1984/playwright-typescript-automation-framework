@@ -53,7 +53,9 @@ test.describe('Login Functionality Tests', () => {
     await page.waitForTimeout(2000);
 
     // Check for error message (location depends on implementation)
-    const errorMessage = page.locator('form[action="/login"] p, .login-form-error, [data-qa="login-error"]');
+    const errorMessage = page.locator(
+      'form[action="/login"] p, .login-form-error, [data-qa="login-error"]',
+    );
     const hasError = await errorMessage.isVisible().catch(() => false);
 
     // Either error is visible or we're still on login page (validation failed)
