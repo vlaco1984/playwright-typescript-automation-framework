@@ -1,6 +1,5 @@
 import { test, expect } from '../../fixtures/uiFixtures';
 import { UserDataFactory } from '../../../shared/utils/userDataFactory';
-import { PaymentDataFactory } from '../../../shared/utils/paymentDataFactory';
 
 /**
  * Story 4 - Negative Scenarios
@@ -129,75 +128,6 @@ test.describe('Negative Scenarios - Error Handling @critical @negative', () => {
 
       // Should return error status or validation error
       expect(createResponse.status()).not.toBe(201);
-    });
-  });
-
-  test.skip('should handle checkout with invalid payment details', async ({
-    authenticationPage,
-    productsPage,
-    cartPage,
-    checkoutPage,
-    navbar,
-    uniqueUserData,
-    request,
-  }) => {
-    // Skipping: automationexercise.com doesn't validate payment details (simulated payment only)
-    // Setup: Create user, login, and add product to cart
-    await test.step('Setup: Create user and add product to cart', async () => {
-      await authenticationPage.navigateToAuthenticationPage();
-      await authenticationPage.startSignup(uniqueUserData.name, uniqueUserData.email);
-      await authenticationPage.completeRegistration(uniqueUserData);
-      await authenticationPage.continueButton.click();
-
-      // Verify user is logged in
-      await expect(authenticationPage.loggedInUserText).toBeVisible();
-
-      await navbar.goToProducts();
-      const productNames = await productsPage.getProductNames();
-      if (productNames[0]) {
-        await productsPage.addProductToCartAndViewCart(productNames[0]);
-      }
-
-      await cartPage.proceedToCheckout();
-      await checkoutPage.placeOrder();
-    });
-
-    // Attempt payment with invalid details
-    await test.step('Attempt payment with invalid card details', async () => {
-      const invalidPaymentData = PaymentDataFactory.generateInvalidPaymentData();
-
-      try {
-        await checkoutPage.completePayment({
-          nameOnCard: invalidPaymentData.nameOnCard ?? '',
-          cardNumber: invalidPaymentData.cardNumber ?? '',
-          cvc: invalidPaymentData.cvc ?? '',
-          expiryMonth: invalidPaymentData.expiryMonth ?? '',
-          expiryYear: invalidPaymentData.expiryYear ?? '',
-        });
-
-        // Should either show validation error or payment should fail
-        const isConfirmed = await checkoutPage.isOrderConfirmed();
-        if (isConfirmed) {
-          // If order went through despite invalid data, this indicates a validation issue
-          console.warn(
-            'Order was confirmed with invalid payment data - potential validation issue',
-          );
-        }
-      } catch {
-        // Payment failure is expected with invalid data
-        console.log('Payment failed as expected with invalid data');
-      }
-    });
-
-    // Cleanup
-    await test.step('Cleanup: Delete test user', async () => {
-      try {
-        const { UserService } = await import('../../../api/services/user.service');
-        const userService = new UserService(request);
-        await userService.deleteUser(uniqueUserData.email, uniqueUserData.password);
-      } catch (error) {
-        console.log('Cleanup failed:', error);
-      }
     });
   });
 
