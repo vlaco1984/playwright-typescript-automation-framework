@@ -29,12 +29,11 @@ test.describe('Negative Scenarios - Error Handling @critical @negative', () => {
       const userService = new UserService(request);
 
       const loginResponse = await userService.verifyLogin('invalid@email.com', 'wrongpassword');
-      // API returns 403 due to CSRF protection
-      expect([403, 404]).toContain(loginResponse.status());
+      expect(loginResponse.status()).toBe(200);
 
-      const responseText = await loginResponse.text();
-      // May contain CSRF error or user not found
-      expect(responseText.length).toBeGreaterThan(0);
+      const responseJson = await loginResponse.json();
+      expect(responseJson.responseCode).toBe(404);
+      expect(responseJson.message).toContain('User not found!');
     });
   });
 
@@ -94,12 +93,11 @@ test.describe('Negative Scenarios - Error Handling @critical @negative', () => {
       const userService = new UserService(request);
 
       const loginResponse = await userService.verifyLogin('nonexistent@user.com', 'password123');
-      // API returns 403 due to CSRF protection
-      expect([403, 404]).toContain(loginResponse.status());
+      expect(loginResponse.status()).toBe(200);
 
-      const responseText = await loginResponse.text();
-      // Response may contain CSRF error or user not found
-      expect(responseText.length).toBeGreaterThan(0);
+      const responseJson = await loginResponse.json();
+      expect(responseJson.responseCode).toBe(404);
+      expect(responseJson.message).toContain('User not found!');
     });
   });
 

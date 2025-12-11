@@ -9,8 +9,7 @@ test.describe('User API @api @critical', () => {
     console.log('Starting User API test suite');
   });
 
-  test.skip('should create user account via API', async ({ userService, uniqueUserData }) => {
-    // Skipping due to CSRF protection on automation exercise API
+  test('should create user account via API', async ({ userService, uniqueUserData }) => {
     await test.step('Create user account via API', async () => {
       const response = await userService.createUser(uniqueUserData);
 
@@ -40,11 +39,7 @@ test.describe('User API @api @critical', () => {
     });
   });
 
-  test.skip('should verify login with valid credentials', async ({
-    userService,
-    uniqueUserData,
-  }) => {
-    // Skipping due to CSRF protection on automation exercise API
+  test('should verify login with valid credentials', async ({ userService, uniqueUserData }) => {
     // First create a user
     await test.step('Create user for login test', async () => {
       const response = await userService.createUser(uniqueUserData);
@@ -76,8 +71,7 @@ test.describe('User API @api @critical', () => {
     });
   });
 
-  test.skip('should return error for invalid login credentials', async ({ userService }) => {
-    // Skipping due to CSRF protection on automation exercise API
+  test('should return error for invalid login credentials', async ({ userService }) => {
     await test.step('Attempt login with invalid credentials', async () => {
       const loginResponse = await userService.verifyLogin('invalid@email.com', 'wrongpassword');
       expect(loginResponse.status()).toBe(200);
@@ -88,8 +82,7 @@ test.describe('User API @api @critical', () => {
     });
   });
 
-  test.skip('should get user details by email', async ({ userService, uniqueUserData }) => {
-    // Skipping due to CSRF protection on automation exercise API
+  test('should get user details by email', async ({ userService, uniqueUserData }) => {
     // First create a user
     await test.step('Create user for details test', async () => {
       const response = await userService.createUser(uniqueUserData);
@@ -121,15 +114,14 @@ test.describe('User API @api @critical', () => {
     });
   });
 
-  test.skip('should return error for non-existent user email', async ({ userService }) => {
-    // Skipping due to CSRF protection on automation exercise API
+  test('should return error for non-existent user email', async ({ userService }) => {
     await test.step('Get details for non-existent user', async () => {
-      const getUserResponse = await userService.getUserByEmail('nonexistent@email.com');
+      const getUserResponse = await userService.getUserByEmail('nonexistent@test.com');
       expect(getUserResponse.status()).toBe(200);
 
       const responseJson = await getUserResponse.json();
       expect(responseJson.responseCode).toBe(404);
-      expect(responseJson.message).toContain('User not found!');
+      expect(responseJson.message).toContain('Account not found');
     });
   });
 });
