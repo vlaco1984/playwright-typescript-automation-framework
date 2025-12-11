@@ -141,7 +141,7 @@ test.describe('Negative Scenarios - Error Handling @critical @negative', () => {
     uniqueUserData,
     request,
   }) => {
-    // Skipping due to complex flow causing timeouts
+    // Skipping: automationexercise.com doesn't validate payment details (simulated payment only)
     // Setup: Create user, login, and add product to cart
     await test.step('Setup: Create user and add product to cart', async () => {
       await authenticationPage.navigateToAuthenticationPage();
@@ -237,7 +237,7 @@ test.describe('Negative Scenarios - Error Handling @critical @negative', () => {
     });
   });
 
-  test.skip('should validate product search with invalid terms', async ({
+  test('should validate product search with invalid terms', async ({
     productsPage,
     navbar,
     page,
