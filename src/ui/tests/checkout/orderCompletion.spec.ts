@@ -73,8 +73,8 @@ test.describe('Order Completion - Purchase + Order History @critical @e2e', () =
     await test.step('Place order', async () => {
       await checkoutPage.placeOrder();
 
-      // Should be redirected to payment page
-      await expect(checkoutPage.paymentForm).toBeVisible();
+      // Should be redirected to payment page - verify by checking pay button visibility
+      await expect(checkoutPage.payAndConfirmButton).toBeVisible();
     });
 
     // Step 6: Complete payment

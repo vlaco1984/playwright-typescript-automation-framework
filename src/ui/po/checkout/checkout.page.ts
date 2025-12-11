@@ -171,6 +171,9 @@ export class CheckoutPage extends BasePage {
    */
   async placeOrder(): Promise<void> {
     await this.placeOrderButton.click();
+    // Wait for navigation to payment page
+    await this.page.waitForURL('**/payment', { timeout: 10000 });
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   /**
