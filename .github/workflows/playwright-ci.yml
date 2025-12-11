@@ -20,6 +20,8 @@ jobs:
         run: npm ci
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+      - name: Install Allure CLI
+        run: npm install -D allure-commandline@2.20.1
 
   test:
     runs-on: ubuntu-latest
