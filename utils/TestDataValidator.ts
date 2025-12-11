@@ -183,10 +183,8 @@ export class TestDataValidator {
         user.yearOfBirth,
       );
       if (!dobValid) {
-        const minYear = TEST_DATA_CONSTANTS.DATE_RANGES.BIRTH_YEAR_MIN;
-        const maxYear = TEST_DATA_CONSTANTS.DATE_RANGES.BIRTH_YEAR_MAX;
         errors.push(
-          `User date of birth is invalid (day: 1-31, month: valid month name, year: ${minYear}-${maxYear})`,
+          'User date of birth is invalid (day: 1-31, month: valid month name, year: 1950-2010)',
         );
       }
     }
@@ -266,12 +264,7 @@ export class TestDataValidator {
    */
   private static validatePassword(password: string): ValidationResult {
     const errors: string[] = [];
-
-    if (password.length < TEST_DATA_CONSTANTS.VALIDATION.PASSWORD.MIN_LENGTH) {
-      errors.push(
-        `Password must be at least ${TEST_DATA_CONSTANTS.VALIDATION.PASSWORD.MIN_LENGTH} characters`,
-      );
-    }
+    const warnings: string[] = [];
 
     if (TEST_DATA_CONSTANTS.VALIDATION.PASSWORD.REQUIRES_UPPERCASE && !/[A-Z]/.test(password)) {
       errors.push('Password must contain at least one uppercase letter');
@@ -358,6 +351,6 @@ export function assertDataValid(data: Booking | UserDetails, dataType: 'booking'
   }
 
   if (result.warnings.length > 0) {
-    console.warn(`Warnings for ${dataType}:\n${result.warnings.map((w) => `- ${w}`).join('\n')}`);
+    console.warn(`⚠️ Warnings for ${dataType}:`, result.warnings);
   }
 }

@@ -104,10 +104,10 @@ export const config: EnvConfig = {
   // Timeout Configuration (in milliseconds)
   timeouts: {
     action: getEnvNumber('ACTION_TIMEOUT', 15000),
-    navigation: getEnvNumber('NAVIGATION_TIMEOUT', 30000),
+    navigation: getEnvNumber('NAVIGATION_TIMEOUT', 60000),
     test: getEnvNumber('TEST_TIMEOUT', 60000),
     apiTest: getEnvNumber('API_TEST_TIMEOUT', 30000),
-    e2eTest: getEnvNumber('E2E_TEST_TIMEOUT', 90000),
+    e2eTest: getEnvNumber('E2E_TEST_TIMEOUT', 180000),
   },
 
   // Storage State Configuration

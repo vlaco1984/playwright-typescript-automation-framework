@@ -1,7 +1,7 @@
 /**
- * Modal Fixture - Simple Cookie Consent Modal Handling
+ * Modal Fixture - Aggressive Cookie Consent Modal Handling
  * Provides automatic modal handling for all tests via Playwright fixtures
- * Closes modals on page load to prevent blocking interactions
+ * Uses multiple strategies to ensure modals are closed
  */
 
 import { test as base, Page } from '@playwright/test';
@@ -16,43 +16,83 @@ export type ModalFixtures = {
 };
 
 /**
- * Create test fixture with simple modal handling
+ * Create test fixture with aggressive modal handling
  */
 export const test = base.extend<ModalFixtures>({
   /**
-   * Page with automatic modal handling on page load only
-   * This prevents the framenavigated listener from firing constantly
+   * Page with aggressive automatic modal handling
+   * Uses multiple strategies to close modals
    */
   pageWithModalHandling: async ({ page }, use) => {
-    // Track if we're already handling a modal to prevent double-handling
-    let isHandlingModal = false;
+    // Aggressive modal handler function
+    const aggressiveModalHandler = async () => {
+      // Small delay to allow modal to render
+      await new Promise((r) => setTimeout(r, 500));
 
-    // Handle modals on page load - simple, single check
-    page.on('load', async () => {
-      await new Promise((r) => setTimeout(r, 300)); // Wait for modal to appear
+      const modalHandler = new ModalHandler(page);
 
-      if (!isHandlingModal) {
-        isHandlingModal = true;
-        try {
-          const modalHandler = new ModalHandler(page);
-          await modalHandler.handleModalIfPresent();
-        } catch (error) {
-          console.log('Modal handling on page load failed (expected if no modal):', error);
-        } finally {
-          isHandlingModal = false;
+      // Strategy 1: Try to close the FunnyConsent modal using the close button
+      try {
+        const isVisible = await modalHandler.isModalVisible(ModalHandler.FUNNY_CONSENT);
+        if (isVisible) {
+          console.log('🔴 Modal detected, attempting to close...');
+          const closed = await modalHandler.closeModal(ModalHandler.FUNNY_CONSENT);
+          if (closed) {
+            console.log('✅ Modal closed successfully');
+          } else {
+            console.log('⚠️  Modal close failed, attempting alternative strategy...');
+
+            // Strategy 2: Force click on any consent button
+            try {
+              const consentBtn = page.locator('.fc-cta-consent, [data-qa="accept-consent"], .fc-button');
+              const btnVisible = await consentBtn.isVisible({ timeout: 1000 }).catch(() => false);
+
+              if (btnVisible) {
+                await consentBtn.first().click({ force: true, timeout: 3000 });
+                await new Promise((r) => setTimeout(r, 300));
+                console.log('✅ Alternative consent button clicked');
+              }
+            } catch (altErr) {
+              console.log('⚠️  Alternative strategy also failed');
+            }
+
+            // Strategy 3: Try to hide/remove the modal completely
+            try {
+              await page.evaluate(() => {
+                const modalRoot = document.querySelector('.fc-consent-root, .fc-dialog-container');
+                if (modalRoot) {
+                  (modalRoot as HTMLElement).style.display = 'none';
+                  console.log('Modal hidden via CSS');
+                }
+              });
+            } catch (hideErr) {
+              console.log('Could not hide modal via CSS');
+            }
+          }
         }
+      } catch (error) {
+        console.log('Modal handling error:', error instanceof Error ? error.message.substring(0, 100) : 'unknown');
       }
+    };
+
+    // Handle modals on page load
+    page.on('load', () => {
+      aggressiveModalHandler().catch(() => {});
     });
+
+    // Handle modals on navigation
+    page.on('framenavigated', () => {
+      aggressiveModalHandler().catch(() => {});
+    });
+
+    // Try to close modal right away in case it's already visible
+    aggressiveModalHandler().catch(() => {});
 
     // Listen for new pages (popups, etc.)
     page.on('popup', async (popup) => {
-      try {
-        const popupModalHandler = new ModalHandler(popup);
-        await new Promise((r) => setTimeout(r, 300));
-        await popupModalHandler.handleModalIfPresent();
-      } catch (error) {
-        console.log('Popup modal handling failed:', error);
-      }
+      await new Promise((r) => setTimeout(r, 500));
+      const popupModalHandler = new ModalHandler(popup);
+      popupModalHandler.handleModalIfPresent().catch(() => {});
     });
 
     // Use the page with automatic modal handling
@@ -60,6 +100,7 @@ export const test = base.extend<ModalFixtures>({
 
     // Cleanup listeners
     page.removeAllListeners('load');
+    page.removeAllListeners('framenavigated');
     page.removeAllListeners('popup');
   },
 
