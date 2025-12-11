@@ -90,8 +90,8 @@ test.describe('Booking API - Full CRUD Flow', () => {
 
     // ============ STEP 7: VERIFY DELETION ============
     // Attempting to get deleted booking should return 404
-    const status = await bookingService.getBookingStatus(bookingId);
-    expect(status).toBe(404);
+    const deleteResponse = await fetch(`https://restful-booker.herokuapp.com/booking/${bookingId}`);
+    expect(deleteResponse.status).toBe(404);
     console.log('✓ Deletion verified: booking no longer exists');
   });
 
@@ -143,12 +143,15 @@ test.describe('Booking API - Full CRUD Flow', () => {
     const patchBookingId = createResponse.bookingid;
     console.log('✓ Created booking for PATCH test:', patchBookingId);
 
-    // Partial update (only update additionalneeds)
+    // Partial update
     const partialUpdate = {
       additionalneeds: 'Smoking room, Extra bed',
     };
 
-    const patchResponse = await bookingService.partialUpdateBooking(patchBookingId, partialUpdate);
+    const patchResponse = await bookingService.partialUpdateBooking(
+      patchBookingId,
+      partialUpdate
+    );
 
     expect(patchResponse.firstname).toBe('Patch'); // Should remain unchanged
     expect(patchResponse.lastname).toBe('Test'); // Should remain unchanged

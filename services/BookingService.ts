@@ -105,8 +105,22 @@ export class BookingService {
       await this.authenticate();
     }
 
+    // RESTful-Booker API requires full booking object for PUT
+    // Fetch current booking first
+    const currentBooking = await this.getBooking(bookingId);
+
+    // Merge updated fields with current booking
+    const fullBookingData: Booking = {
+      firstname: updatedBooking.firstname ?? currentBooking.firstname,
+      lastname: updatedBooking.lastname ?? currentBooking.lastname,
+      totalprice: updatedBooking.totalprice ?? currentBooking.totalprice,
+      depositpaid: updatedBooking.depositpaid ?? currentBooking.depositpaid,
+      bookingdates: updatedBooking.bookingdates ?? currentBooking.bookingdates,
+      additionalneeds: updatedBooking.additionalneeds ?? currentBooking.additionalneeds,
+    };
+
     const response = await this.apiContext.put(`${this.baseURL}/booking/${bookingId}`, {
-      data: updatedBooking,
+      data: fullBookingData,
       headers: {
         Cookie: `token=${this.authToken}`,
       },
@@ -142,16 +156,6 @@ export class BookingService {
     expect(response.status()).toBe(200);
     const data = (await response.json()) as Booking;
     return data;
-  }
-
-  /**
-   * Get booking HTTP status code (for verification of deletion, etc.)
-   * @param bookingId ID of the booking to check
-   * @returns Promise with HTTP status code
-   */
-  async getBookingStatus(bookingId: number): Promise<number> {
-    const response = await this.apiContext.get(`${this.baseURL}/booking/${bookingId}`);
-    return response.status();
   }
 
   /**
