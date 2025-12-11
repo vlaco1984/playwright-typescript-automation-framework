@@ -155,7 +155,8 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
   test('Create booking with special characters in name', async () => {
     const bookingData = {
       firstname: '<script>alert("xss")</script>',
-      lastname: 'O\'Brien',
+      // eslint-disable-next-line quotes
+      lastname: "O'Brien",
       totalprice: 100,
       depositpaid: true,
       bookingdates: {
