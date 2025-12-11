@@ -298,8 +298,8 @@ test.describe('UI Negative Scenario Tests', () => {
     const loginBtn = page.locator('button[data-qa="login-button"]');
 
     // SQL injection attempt
-    await emailInput.fill("' OR '1'='1");
-    await passwordInput.fill("' OR '1'='1");
+    await emailInput.fill('\' OR \'1\'=\'1');
+    await passwordInput.fill('\' OR \'1\'=\'1');
     await loginBtn.click();
 
     // Should not be logged in

@@ -246,7 +246,7 @@ test.describe('Booking API - Filters and Queries', () => {
 
   test('Filter with special characters in query', async () => {
     const response = await fetch(
-      "https://restful-booker.herokuapp.com/booking?firstname=O'Brien&lastname=Smith",
+      'https://restful-booker.herokuapp.com/booking?firstname=O\'Brien&lastname=Smith',
     );
 
     expect(response.status).toBe(200);

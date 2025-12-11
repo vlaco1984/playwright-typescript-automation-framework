@@ -222,7 +222,7 @@ test.describe('Booking API - Negative Scenarios', () => {
         checkin: '2025-01-01',
         checkout: '2025-01-05',
       },
-      additionalneeds: "'; DROP TABLE bookings; --",
+      additionalneeds: '\'; DROP TABLE bookings; --',
     };
 
     const response = await fetch('https://restful-booker.herokuapp.com/booking', {

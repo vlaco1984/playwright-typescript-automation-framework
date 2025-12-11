@@ -25,7 +25,7 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     try {
       await bookingService.updateBooking(999999, updateData);
       console.log('✓ Non-existent booking update handled');
-    } catch (error) {
+    } catch {
       console.log('✓ Non-existent booking update throws expected error');
     }
   });
@@ -34,7 +34,7 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     try {
       await bookingService.deleteBooking(999999);
       console.log('✓ Non-existent booking delete handled');
-    } catch (error) {
+    } catch {
       console.log('✓ Non-existent booking delete throws expected error');
     }
   });
@@ -55,7 +55,8 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
   });
 
   test('Create booking with null required fields', async () => {
-    const bookingData = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bookingData: any = {
       firstname: null,
       lastname: 'TestLast',
       totalprice: 100,
@@ -64,12 +65,12 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
         checkin: '2024-01-01',
         checkout: '2024-01-02',
       },
-    } as any;
+    };
 
     try {
-      const response = await bookingService.createBooking(bookingData);
+      await bookingService.createBooking(bookingData);
       console.log('✓ Booking with null firstname created (API may accept it)');
-    } catch (error) {
+    } catch {
       console.log('✓ Booking with null firstname rejected as expected');
     }
   });
@@ -87,9 +88,9 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     };
 
     try {
-      const response = await bookingService.createBooking(bookingData);
+      await bookingService.createBooking(bookingData);
       console.log('✓ Booking with empty strings created (API may accept it)');
-    } catch (error) {
+    } catch {
       console.log('✓ Booking with empty strings rejected as expected');
     }
   });
@@ -107,9 +108,9 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     };
 
     try {
-      const response = await bookingService.createBooking(bookingData);
+      await bookingService.createBooking(bookingData);
       console.log('✓ Booking with negative price created');
-    } catch (error) {
+    } catch {
       console.log('✓ Booking with negative price rejected');
     }
   });
@@ -127,9 +128,9 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     };
 
     try {
-      const response = await bookingService.createBooking(bookingData);
+      await bookingService.createBooking(bookingData);
       console.log('✓ Booking with reversed dates created');
-    } catch (error) {
+    } catch {
       console.log('✓ Booking with reversed dates rejected');
     }
   });
@@ -154,7 +155,7 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
   test('Create booking with special characters in name', async () => {
     const bookingData = {
       firstname: '<script>alert("xss")</script>',
-      lastname: "O'Brien",
+      lastname: 'O\'Brien',
       totalprice: 100,
       depositpaid: true,
       bookingdates: {
@@ -207,7 +208,7 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     try {
       await bookingService.deleteBooking(createdBooking.bookingid);
       console.log('✓ Second delete handled gracefully');
-    } catch (error) {
+    } catch {
       console.log('✓ Second delete throws expected error');
     }
   });
@@ -226,9 +227,9 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     };
 
     try {
-      const response = await bookingService.createBooking(bookingData);
+      await bookingService.createBooking(bookingData);
       console.log('✓ Booking with very long names created');
-    } catch (error) {
+    } catch {
       console.log('✓ Booking with very long names rejected');
     }
   });
@@ -275,7 +276,7 @@ test.describe('RESTful Booker API - Negative Scenarios Extended', () => {
     const token1 = bookingService.getAuthToken();
     const booking = BookingFactory.createBooking();
 
-    const created = await bookingService.createBooking(booking);
+    await bookingService.createBooking(booking);
     const token2 = bookingService.getAuthToken();
 
     expect(token1).toBe(token2);

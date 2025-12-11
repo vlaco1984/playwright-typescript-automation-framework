@@ -94,7 +94,7 @@ test.describe('RESTful Booker API - Comprehensive CRUD', () => {
     try {
       await bookingService.getBooking(createdResponse.bookingid);
       console.log('✓ Deleted booking (may still be retrievable depending on API)');
-    } catch (error) {
+    } catch {
       console.log('✓ Deleted booking is no longer retrievable');
     }
   });
@@ -121,7 +121,7 @@ test.describe('RESTful Booker API - Comprehensive CRUD', () => {
     const createdResponse = await bookingService.createBooking(booking);
 
     const update1 = BookingFactory.createBooking();
-    const response1 = await bookingService.updateBooking(createdResponse.bookingid, update1);
+    await bookingService.updateBooking(createdResponse.bookingid, update1);
 
     const update2 = BookingFactory.createBooking();
     const response2 = await bookingService.updateBooking(createdResponse.bookingid, update2);
@@ -193,7 +193,7 @@ test.describe('RESTful Booker API - Comprehensive CRUD', () => {
   });
 
   test('Create and list all booking IDs multiple times', async () => {
-    const booking1 = await bookingService.createBooking(BookingFactory.createBooking());
+    await bookingService.createBooking(BookingFactory.createBooking());
     const ids1 = await bookingService.getAllBookingIds();
 
     const booking2 = await bookingService.createBooking(BookingFactory.createBooking());
