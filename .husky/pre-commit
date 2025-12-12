@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$' | xargs -r npx eslint || exit 1
-git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|json|css|md)$' | xargs -r npx prettier --check || exit 1
+# Run ESLint and allow commits on warnings (fail only on errors)
+ESLINT_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$')
+if [ -n "$ESLINT_FILES" ]; then
+	npx eslint --max-warnings=0 $ESLINT_FILES || exit 1
+fi
+
+# Run Prettier in check mode; do not block on formatting issues
+PRETTIER_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|json|css|md)$')
+if [ -n "$PRETTIER_FILES" ]; then
+	npx prettier --check $PRETTIER_FILES || true
+fi

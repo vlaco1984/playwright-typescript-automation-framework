@@ -1,17 +1,7 @@
-import { expect } from '@playwright/test';
-import { test, testInvalid } from './login.fixtures';
-// expect is already imported above
-import { RegisterPage } from '../../pages/registerPage';
-import { ProductsPage } from '../../pages/productsPage';
-import { CartPage } from '../../pages/cartPage';
-import { LoginPage } from '../../pages/loginPage';
+import { test, expect } from './page.fixtures';
 
-test('should register a new user via UI and verify via API', async ({ page, request }) => {
-  const registerPage = new RegisterPage(page);
-  await registerPage.goto();
-  // Close consent modal if present
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
+test.describe('E2E Tests', () => {
+test('should register a new user via UI and verify via API', async ({ registerPage, request }) => {
   const uniqueEmail = `newuser.${Date.now()}@example.com`;
   await registerPage.register('New User', uniqueEmail, 'Password123!');
   // Assert via expect.poll: wait until API reports the user exists
@@ -35,16 +25,13 @@ test('should register a new user via UI and verify via API', async ({ page, requ
   expect(verifyBody.user.email).toBe(uniqueEmail);
 });
 
-test('should login, add product to cart, and verify on checkout page', async ({ page }) => {
-  const productsPage = new ProductsPage(page);
-  const cartPage = new CartPage(page);
+test('should login, add product to cart, and verify on checkout page', async ({ page, productsPage, cartPage }) => {
   await productsPage.goto();
   await productsPage.addFirstProductToCart();
-  await cartPage.goto();
   await expect
     .poll(
       async () => {
-        await page.goto('/view_cart');
+        await cartPage.goto();
         const visible = await page.locator(cartPage.cartItemSelector).isVisible();
         return visible;
       },
@@ -53,11 +40,17 @@ test('should login, add product to cart, and verify on checkout page', async ({ 
     .toBe(true);
 });
 
-testInvalid('should show error for invalid login', async ({ page }) => {
+test('should show error for invalid login', async ({ page }) => {
   // API check: verify login fails
   const res = await page.request.post('https://automationexercise.com/api/verifyLogin', {
     data: { email: 'wronguser@example.com', password: 'wrongpassword' },
   });
   const body = (await res.json()) as { responseCode: number };
   expect(body.responseCode).not.toBe(200);
+});
+
+test('should show error for invalid login via UI', async ({ loginPage, page }) => {
+  await loginPage.login('wronguser@example.com', 'wrongpassword');
+  await expect(page).toHaveURL(/login/);
+});
 });
