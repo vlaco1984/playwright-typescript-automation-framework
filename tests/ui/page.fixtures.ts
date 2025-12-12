@@ -13,26 +13,18 @@ export const test = base.extend<{
 }>({
   loginPage: async ({ page }, use) => {
     const lp = new LoginPage(page);
-    await lp.goto();
-    await lp.consentModal.close();
     await use(lp);
   },
   registerPage: async ({ page }, use) => {
     const rp = new RegisterPage(page);
-    await rp.goto();
-    await rp.consentModal.close();
     await use(rp);
   },
   productsPage: async ({ page }, use) => {
     const pp = new ProductsPage(page);
-    await pp.goto();
-    await pp.consentModal.close();
     await use(pp);
   },
   cartPage: async ({ page }, use) => {
     const cp = new CartPage(page);
-    await cp.goto();
-    await cp.consentModal.close();
     await use(cp);
   },
 });

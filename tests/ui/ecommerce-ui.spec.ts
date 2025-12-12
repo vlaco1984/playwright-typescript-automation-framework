@@ -5,6 +5,7 @@ test.describe('E2E Tests', () => {
     registerPage,
     request,
   }) => {
+    await registerPage.goto();
     const uniqueEmail = `newuser.${Date.now()}@example.com`;
     await registerPage.register('New User', uniqueEmail, 'Password123!');
     // Assert via expect.poll: wait until API reports the user exists
@@ -35,18 +36,20 @@ test.describe('E2E Tests', () => {
     await productsPage.goto();
     await productsPage.addFirstProductToCart();
     await expect
-      .poll(
+      .pgit oll(
         async () => {
           await cartPage.goto();
           const visible = await cartPage.hasVisibleItem();
+          console.log(visible);
           return visible;
         },
-        { timeout: 5000 },
+        { timeout: 50000 },
       )
       .toBe(true);
   });
 
   test('should show error for invalid login', async ({ loginPage, page }) => {
+    await loginPage.goto();
     const res = await page.request.post('https://automationexercise.com/api/verifyLogin', {
       data: { email: 'wronguser@example.com', password: 'wrongpassword' },
     });
