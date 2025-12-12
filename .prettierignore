@@ -1,0 +1,16 @@
+# Reports and generated files
+reports/
+allure-results/
+playwright-report/
+test-results/
+test-results.json
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Package manager files
+package-lock.json
