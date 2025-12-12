@@ -1,4 +1,4 @@
-﻿import { test, expect } from '@playwright/test';
+﻿import { test } from '@playwright/test';
 import { UserService } from './api/services/user.service';
 import { UserDataFactory } from './shared/utils/userDataFactory';
 

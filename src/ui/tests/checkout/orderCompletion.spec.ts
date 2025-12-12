@@ -17,7 +17,7 @@ test.describe('Order Completion - Purchase + Order History @critical @e2e', () =
     request,
   }) => {
     test.setTimeout(90000);
-    
+
     await test.step('Create user account via UI', async () => {
       await authenticationPage.navigateToAuthenticationPage();
       await authenticationPage.startSignup(uniqueUserData.name, uniqueUserData.email);

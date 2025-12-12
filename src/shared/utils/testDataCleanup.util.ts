@@ -24,7 +24,10 @@ export class TestDataCleanup {
     if (!this.createdUsers.has(category)) {
       this.createdUsers.set(category, []);
     }
-    this.createdUsers.get(category)!.push({ email, password });
+    const users = this.createdUsers.get(category);
+    if (users) {
+      users.push({ email, password });
+    }
   }
 
   /**
@@ -33,16 +36,16 @@ export class TestDataCleanup {
    * @param request - Playwright API request context
    */
   static async cleanupCategory(category: string, request: APIRequestContext): Promise<void> {
-    const users = this.createdUsers.get(category) || [];
+    const users = this.createdUsers.get(category) ?? [];
     const userService = new UserService(request);
 
     for (const user of users) {
       try {
         const response = await userService.deleteUser(user.email, user.password);
         const result = await response.json();
-        console.log(Deleted user :, result.message || 'Success');
+        console.log(`Deleted user ${user.email}:`, result.message ?? 'Success');
       } catch (error) {
-        console.warn(Failed to delete user :, error);
+        console.warn(`Failed to delete user ${user.email}:`, error);
       }
     }
 

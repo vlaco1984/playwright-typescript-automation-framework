@@ -1,4 +1,3 @@
-import type { APIResponse } from '@playwright/test';
 import { test, expect } from '../../fixtures/uiFixtures';
 import { UserDataFactory } from '../../../shared/utils/userDataFactory';
 
