@@ -1,24 +1,32 @@
 // Page Object Model for Products UI
-import { Page } from '@playwright/test';
-import { closeConsentModal } from '../utils/helpers';
+import { Page, Locator } from '@playwright/test';
+import { ConsentModal } from '../components/consentModal';
 
 export class ProductsPage {
-  private productCard = '.features_items .single-products';
-  private addToCartButton = '.features_items .single-products .add-to-cart';
-  private outOfStockAddToCartButton = '.product-card.out-of-stock button.add-to-cart';
+  private productCard: Locator;
+  private addToCartButton: Locator;
+  private outOfStockAddToCartButton: Locator;
+  public consentModal: ConsentModal;
 
-  constructor(private page: Page) {}
+  constructor(private page: Page) {
+    this.productCard = this.page.locator('.features_items .single-products');
+    this.addToCartButton = this.page.locator('.features_items .single-products .add-to-cart');
+    this.outOfStockAddToCartButton = this.page.locator(
+      '.product-card.out-of-stock button.add-to-cart',
+    );
+    this.consentModal = new ConsentModal(this.page);
+  }
   async goto() {
     await this.page.goto('/products');
-    await closeConsentModal(this.page);
+    await this.consentModal.close();
   }
   async addFirstProductToCart() {
-    const firstCard = this.page.locator(this.productCard).first();
+    const firstCard = this.productCard.first();
     await firstCard.scrollIntoViewIfNeeded();
     await firstCard.hover();
-    await this.page.locator(this.addToCartButton).first().click();
+    await this.addToCartButton.first().click();
   }
   async addOutOfStockProductToCart() {
-    await this.page.click(this.outOfStockAddToCartButton);
+    await this.outOfStockAddToCartButton.click();
   }
 }

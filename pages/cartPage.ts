@@ -1,22 +1,26 @@
 // Page Object Model for Cart UI
 import { Page, Locator } from '@playwright/test';
-import { closeConsentModal } from '../utils/helpers';
+import { ConsentModal } from '../components/consentModal';
 
 export class CartPage {
-  public cartItemSelector: string;
-  public checkoutButton: string;
+  private cartItems: Locator;
+  private checkoutButton: Locator;
+  public consentModal: ConsentModal;
   constructor(private page: Page) {
-    this.cartItemSelector = 'td.cart_product';
-    this.checkoutButton = 'button.checkout';
+    this.cartItems = this.page.locator('td.cart_product');
+    this.checkoutButton = this.page.locator('button.checkout');
+    this.consentModal = new ConsentModal(this.page);
   }
   async goto() {
     await this.page.goto('/view_cart');
-    await closeConsentModal(this.page);
+    await this.consentModal.close();
   }
-  cartItems(): Locator {
-    return this.page.locator(this.cartItemSelector);
-  }
+
   async checkout() {
-    await this.page.click(this.checkoutButton);
+    await this.checkoutButton.click();
+  }
+
+  async hasVisibleItem(): Promise<boolean> {
+    return this.cartItems.first().isVisible();
   }
 }

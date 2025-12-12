@@ -1,13 +1,4 @@
-import type { Page } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
-
-export async function closeConsentModal(page: Page): Promise<void> {
-  const loginPage = new LoginPage(page);
-  const consentBtn = await page.$(loginPage.consentButton);
-  if (consentBtn) {
-    await consentBtn.click();
-  }
-}
+// Consent modal logic moved to components/consentModal.ts
 
 export function buildBookingData(
   overrides: Partial<{

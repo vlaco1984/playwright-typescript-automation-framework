@@ -1,23 +1,24 @@
 // Page Object Model for Registration UI
 import { Page, Locator } from '@playwright/test';
-import { closeConsentModal } from '../utils/helpers';
+import { ConsentModal } from '../components/consentModal';
 
 export class RegisterPage {
-  public nameInput: string;
-  public emailInput: string;
-  public signupButton: string;
-  public passwordInput: string;
-  public successMessageSelector: string;
-  public firstNameInput: string;
-  public lastNameInput: string;
-  public address1Input: string;
-  public countrySelect: string;
-  public stateInput: string;
-  public cityInput: string;
-  public zipcodeInput: string;
-  public mobileNumberInput: string;
-  public createAccountButton: string;
+  private nameInput: string;
+  private emailInput: string;
+  private signupButton: string;
+  private passwordInput: string;
+  private successMessageSelector: string;
+  private firstNameInput: string;
+  private lastNameInput: string;
+  private address1Input: string;
+  private countrySelect: string;
+  private stateInput: string;
+  private cityInput: string;
+  private zipcodeInput: string;
+  private mobileNumberInput: string;
+  private createAccountButton: string;
 
+  public consentModal: ConsentModal;
   constructor(private page: Page) {
     this.nameInput = 'input[data-qa="signup-name"]';
     this.emailInput = 'input[data-qa="signup-email"]';
@@ -33,10 +34,11 @@ export class RegisterPage {
     this.zipcodeInput = 'input[data-qa="zipcode"]';
     this.mobileNumberInput = 'input[data-qa="mobile_number"]';
     this.createAccountButton = 'button[data-qa="create-account"]';
+    this.consentModal = new ConsentModal(this.page);
   }
   async goto() {
     await this.page.goto('/login');
-    await closeConsentModal(this.page);
+    await this.consentModal.close();
   }
   async register(name: string, email: string, password: string) {
     await this.page.locator(this.nameInput).waitFor({ state: 'visible' });
