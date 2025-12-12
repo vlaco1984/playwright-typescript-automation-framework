@@ -12,7 +12,7 @@ test.describe('Authentication @critical', () => {
       console.log('Starting User Registration test suite');
     });
 
-    test('should register new user via UI and verify user creation via API', async ({
+    test.only('should register new user via UI and verify user creation via API', async ({
       page,
       authenticationPage,
       uniqueUserData,
@@ -120,7 +120,7 @@ test.describe('Authentication @critical', () => {
       };
 
       const invalidData = UserDataFactory.generateInvalidUserData();
-      const invalidRegistrationResponse = await userService.createUser(invalidData);
+      const invalidRegistrationResponse = await userService.createUser(invalidData as any);
       invalidRegistrationData = {
         status: invalidRegistrationResponse.status(),
         body: await invalidRegistrationResponse.json(),

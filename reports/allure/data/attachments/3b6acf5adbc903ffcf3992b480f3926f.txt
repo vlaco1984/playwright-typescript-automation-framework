@@ -1,3 +1,0 @@
-Cookie consent accepted successfully
-No cookie consent dialog detected or already handled
-Checkout correctly requires login
