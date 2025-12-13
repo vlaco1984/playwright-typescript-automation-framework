@@ -36,7 +36,7 @@ test.describe('E2E Tests', () => {
     await productsPage.goto();
     await productsPage.addFirstProductToCart();
     await expect
-      .pgit oll(
+      .poll(
         async () => {
           await cartPage.goto();
           const visible = await cartPage.hasVisibleItem();
