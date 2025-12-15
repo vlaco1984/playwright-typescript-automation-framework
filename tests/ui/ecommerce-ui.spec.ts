@@ -40,7 +40,6 @@ test.describe('E2E Tests', () => {
         async () => {
           await cartPage.goto();
           const visible = await cartPage.hasVisibleItem();
-          console.log(visible);
           return visible;
         },
         { timeout: 50000 },
