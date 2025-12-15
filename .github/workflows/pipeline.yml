@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [laszlo_veres]
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pages: write
@@ -44,6 +48,10 @@ jobs:
         run: npx playwright test
       - name: Generate Allure report
         run: npx allure generate allure-results --clean -o allure-report
+      - name: Verify Allure report directory
+        run: |
+          test -d allure-report && echo "Allure report exists" || (echo "Allure report missing" && exit 1)
+          ls -la allure-report | head -n 50
       - name: Upload Pages artifact (Allure report)
         uses: actions/upload-pages-artifact@v3
         with:
@@ -60,6 +68,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: ${{ github.event_name == 'push' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
