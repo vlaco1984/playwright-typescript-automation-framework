@@ -2,9 +2,10 @@ name: Project Pipeline
 
 on:
   push:
-    branches: [laszlo_veres]
+    branches: [main, laszlo_veres]
   pull_request:
     branches: [laszlo_veres]
+  workflow_dispatch:
 
 concurrency:
   group: pages
@@ -67,11 +68,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-preview:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.event_name == 'pull_request' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy preview to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
