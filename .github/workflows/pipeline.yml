@@ -81,6 +81,11 @@ jobs:
       name: github-pages
       url: https://vlaco1984.github.io/playwright-typescript-automation-framework/
     steps:
+      - name: Download Allure report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
       - name: Compute timestamp
         id: ts
         run: echo "ts=$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
