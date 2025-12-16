@@ -81,6 +81,18 @@ jobs:
       name: github-pages
       url: https://vlaco1984.github.io/playwright-typescript-automation-framework/
     steps:
+      - name: Preflight check for GH_PAGES_TOKEN
+        run: |
+          if [ -z "${{ secrets.GH_PAGES_TOKEN }}" ]; then
+            echo "GH_PAGES_TOKEN secret is missing. Add a PAT with Contents: Read/Write to repo settings.";
+            exit 1;
+          fi
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.GH_PAGES_TOKEN }}" https://api.github.com/repos/${{ github.repository }})
+          if [ "$CODE" -ge 400 ]; then
+            echo "PAT cannot access repo (HTTP $CODE). Ensure the token has access to this repository with Contents: Read/Write.";
+            exit 1;
+          fi
+        shell: bash
       - name: Download Allure report artifact
         uses: actions/download-artifact@v4
         with:
