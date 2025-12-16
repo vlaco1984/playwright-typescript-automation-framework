@@ -96,6 +96,7 @@ jobs:
           folder: allure-report
           target-folder: reports/${{ steps.ts.outputs.ts }}
           clean: false
+          token: ${{ secrets.GH_PAGES_TOKEN }}
       - name: Publish index page listing all reports
         run: |
           BUILD_DIR=_pages_root
@@ -139,3 +140,4 @@ jobs:
           branch: gh-pages
           folder: _pages_root
           clean: false
+          token: ${{ secrets.GH_PAGES_TOKEN }}
