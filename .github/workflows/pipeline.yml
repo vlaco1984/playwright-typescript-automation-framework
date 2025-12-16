@@ -79,8 +79,54 @@ jobs:
     if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://vlaco1984.github.io/playwright-typescript-automation-framework/
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Prepare index page (dynamic listing)
+        run: |
+          BUILD_DIR=_pages_root
+          mkdir -p "$BUILD_DIR"
+          cat > "$BUILD_DIR/index.html" << 'EOF'
+          <!doctype html>
+          <html>
+          <head>
+            <meta charset="utf-8" />
+            <title>Allure Reports Index</title>
+            <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:32px} a{color:#0366d6;text-decoration:none} a:hover{text-decoration:underline}</style>
+          </head>
+          <body>
+            <h1>Allure Reports</h1>
+            <p>Listing of reports published under <code>/reports/</code>.</p>
+            <ul id="list"></ul>
+            <script>
+              const owner = 'vlaco1984';
+              const repo = 'playwright-typescript-automation-framework';
+              const api = `https://api.github.com/repos/${owner}/${repo}/contents/reports?ref=gh-pages`;
+              fetch(api).then(r=>r.json()).then(items=>{
+                const ul=document.getElementById('list');
+                if(!Array.isArray(items)) { ul.innerHTML = '<li>No reports yet</li>'; return; }
+                items.filter(i=>i.type==='dir').sort((a,b)=>a.name<b.name?1:-1).forEach(i=>{
+                  const li=document.createElement('li');
+                  const a=document.createElement('a');
+                  a.href = `./reports/${i.name}/index.html`;
+                  a.textContent = i.name;
+                  li.appendChild(a);
+                  ul.appendChild(li);
+                });
+              }).catch(()=>{ document.getElementById('list').innerHTML = '<li>Could not load list</li>'; });
+            </script>
+          </body>
+          </html>
+          EOF
+      - name: Publish index to gh-pages root
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: _pages_root
+          clean: false
+      - name: Publish current Allure report under unique path
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: allure-report
+          target-folder: reports/${{ github.run_number }}-${{ github.sha }}
+          clean: false
