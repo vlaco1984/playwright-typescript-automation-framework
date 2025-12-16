@@ -1,9 +1,8 @@
 import { test as base, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/loginPage';
-import { RegisterPage } from '../../pages/registerPage';
-import { ProductsPage } from '../../pages/productsPage';
-import { CartPage } from '../../pages/cartPage';
-// Consent modal handling is provided via each page's component
+import { LoginPage } from '../pages/loginPage';
+import { RegisterPage } from '../pages/registerPage';
+import { ProductsPage } from '../pages/productsPage';
+import { CartPage } from '../pages/cartPage';
 
 export const test = base.extend<{
   loginPage: LoginPage;
