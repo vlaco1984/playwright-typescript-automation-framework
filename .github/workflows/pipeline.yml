@@ -76,12 +76,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: https://vlaco1984.github.io/playwright-typescript-automation-framework/
     steps:
-      - name: Prepare index page (dynamic listing)
+      - name: Compute timestamp
+        id: ts
+        run: echo "ts=$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+      - name: Publish Allure report with timestamped path
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: allure-report
+          target-folder: reports/${{ steps.ts.outputs.ts }}
+          clean: false
+      - name: Publish index page listing all reports
         run: |
           BUILD_DIR=_pages_root
           mkdir -p "$BUILD_DIR"
@@ -95,7 +105,7 @@ jobs:
           </head>
           <body>
             <h1>Allure Reports</h1>
-            <p>Listing of reports published under <code>/reports/</code>.</p>
+            <p>Listing of timestamped reports under <code>/reports/</code>.</p>
             <ul id="list"></ul>
             <script>
               const owner = 'vlaco1984';
@@ -117,16 +127,10 @@ jobs:
           </body>
           </html>
           EOF
-      - name: Publish index to gh-pages root
+        shell: bash
+      - name: Deploy index to gh-pages root
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: _pages_root
-          clean: false
-      - name: Publish current Allure report under unique path
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: allure-report
-          target-folder: reports/${{ github.run_number }}-${{ github.sha }}
           clean: false
