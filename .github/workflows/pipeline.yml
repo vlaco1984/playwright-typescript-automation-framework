@@ -27,13 +27,18 @@ jobs:
         with:
           node-version: '24.12.x'
       - name: Install dependencies (include dev)
-        run: npm ci --include=dev
+        run: npm ci
+        env:
+          NODE_ENV: development
       - name: Verify Playwright modules
         run: |
           echo "Resolving @playwright/test";
-          node -e "console.log(require.resolve('@playwright/test'))";
+          node -e "console.log(require.resolve('@playwright/test/package.json'))";
+          node -e "console.log(require('@playwright/test/package.json').version)";
           echo "Playwright version:";
           npx playwright --version
+          echo "List @playwright/test dir:";
+          ls -la node_modules/@playwright/test || true
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
