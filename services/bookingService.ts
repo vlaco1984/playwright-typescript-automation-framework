@@ -1,5 +1,5 @@
 // Service layer for Booking API
-import { apiEndpoints, apiBaseUrl } from '../config/test-data';
+import { apiEndpoints } from '../config/test-data';
 import { APIRequestContext, APIResponse } from '@playwright/test';
 
 export interface BookingDates {
@@ -23,18 +23,18 @@ export class BookingService {
   ) {}
 
   async createBooking(data: BookingData): Promise<APIResponse> {
-    return this.apiRequest.post(`${apiBaseUrl}${apiEndpoints.booking}`, {
+    return this.apiRequest.post(`${apiEndpoints.booking}`, {
       data,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
   async getBooking(id: number | string): Promise<APIResponse> {
-    return this.apiRequest.get(`${apiBaseUrl}${apiEndpoints.booking}/${id}`);
+    return this.apiRequest.get(`${apiEndpoints.booking}/${id}`);
   }
 
   async updateBooking(id: number | string, data: BookingData): Promise<APIResponse> {
-    return this.apiRequest.put(`${apiBaseUrl}${apiEndpoints.booking}/${id}`, {
+    return this.apiRequest.put(`${apiEndpoints.booking}/${id}`, {
       data,
       headers: {
         Cookie: `token=${this.token}`,

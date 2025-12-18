@@ -12,9 +12,7 @@ test.describe('E2E Tests', () => {
     await expect
       .poll(
         async () => {
-          const res = await request.get(
-            `https://automationexercise.com/api/getUserDetailByEmail?email=${uniqueEmail}`,
-          );
+          const res = await request.get(`/api/getUserDetailByEmail?email=${uniqueEmail}`);
           const body = await res.json();
           return body.responseCode;
         },
@@ -22,9 +20,7 @@ test.describe('E2E Tests', () => {
       )
       .toBe(200);
     // Final check: confirm email matches
-    const verifyRes = await request.get(
-      `https://automationexercise.com/api/getUserDetailByEmail?email=${uniqueEmail}`,
-    );
+    const verifyRes = await request.get(`/api/getUserDetailByEmail?email=${uniqueEmail}`);
     const verifyBody = await verifyRes.json();
     expect(verifyBody.user.email).toBe(uniqueEmail);
   });
@@ -49,7 +45,7 @@ test.describe('E2E Tests', () => {
 
   test('should show error for invalid login', async ({ loginPage, page }) => {
     await loginPage.goto();
-    const res = await page.request.post('https://automationexercise.com/api/verifyLogin', {
+    const res = await page.request.post('/api/verifyLogin', {
       data: { email: 'wronguser@example.com', password: 'wrongpassword' },
     });
     await loginPage.login('wronguser@example.com', 'wrongpassword');

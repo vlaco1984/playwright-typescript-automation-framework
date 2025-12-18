@@ -8,7 +8,7 @@ export const testUser = {
   password: 'password123',
 };
 
-export const apiBaseUrl = 'https://restful-booker.herokuapp.com';
+// Base URLs are defined at project config level (playwright.config.ts)
 
 export const apiEndpoints = {
   auth: '/auth',

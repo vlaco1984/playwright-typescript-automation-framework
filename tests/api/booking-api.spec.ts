@@ -1,24 +1,22 @@
 import { test, expect } from '@playwright/test';
 import { BookingService } from '../../services/bookingService';
 import { buildBookingData } from '../../utils/helpers';
-import { testUser, apiEndpoints, apiBaseUrl } from '../../config/test-data';
-
-let token: string;
-let bookingService: BookingService;
+import { testUser, apiEndpoints } from '../../config/test-data';
+import type { APIRequestContext } from '@playwright/test';
 
 test.describe('API Tests', () => {
-  test.beforeAll(async ({ playwright }) => {
-    const apiRequest = await playwright.request.newContext();
-    const response = await apiRequest.post(`${apiBaseUrl}${apiEndpoints.auth}`, {
+  const authenticate = async (request: APIRequestContext): Promise<string> => {
+    const response = await request.post(`${apiEndpoints.auth}`, {
       data: { username: testUser.username, password: testUser.password },
       headers: { 'Content-Type': 'application/json' },
     });
     const authBody = (await response.json()) as { token: string };
-    token = authBody.token;
-    bookingService = new BookingService(apiRequest, token);
-  });
+    return authBody.token;
+  };
 
-  test('should create a booking', async () => {
+  test('should create a booking', async ({ request }) => {
+    const token = await authenticate(request);
+    const bookingService = new BookingService(request, token);
     const bookingData = buildBookingData();
     const response = await bookingService.createBooking(bookingData);
     expect(response.ok()).toBeTruthy();
@@ -26,7 +24,9 @@ test.describe('API Tests', () => {
     expect(body.bookingid).toBeDefined();
   });
 
-  test('should get a booking by id', async () => {
+  test('should get a booking by id', async ({ request }) => {
+    const token = await authenticate(request);
+    const bookingService = new BookingService(request, token);
     const bookingData = buildBookingData();
     const createRes = await bookingService.createBooking(bookingData);
     const createBody = (await createRes.json()) as { bookingid: number };
@@ -43,9 +43,8 @@ test.describe('API Tests', () => {
     expect(booking.firstname).toBe(bookingData.firstname);
   });
 
-  test('should fail unauthorized booking update', async ({ playwright }) => {
-    const apiRequest = await playwright.request.newContext();
-    const bookingServiceNoAuth = new BookingService(apiRequest, '');
+  test('should fail unauthorized booking update', async ({ request }) => {
+    const bookingServiceNoAuth = new BookingService(request, '');
     const bookingData = buildBookingData();
     const createRes = await bookingServiceNoAuth.createBooking(bookingData);
     const created = (await createRes.json()) as { bookingid: number };
@@ -57,7 +56,9 @@ test.describe('API Tests', () => {
     expect(updateRes.status()).toBe(403);
   });
 
-  test('should update a booking', async () => {
+  test('should update a booking', async ({ request }) => {
+    const token = await authenticate(request);
+    const bookingService = new BookingService(request, token);
     // Create a booking first
     const bookingData = buildBookingData();
     const createRes = await bookingService.createBooking(bookingData);
