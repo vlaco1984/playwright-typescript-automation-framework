@@ -5,6 +5,12 @@ import { testUser, apiEndpoints } from '../test-data/test-data';
 import type { APIRequestContext } from '@playwright/test';
 
 test.describe('API Tests', () => {
+  /**
+   * Authenticate against the API and return a bearer token.
+   *
+   * @param request - Playwright API client used to perform the auth request.
+   * @returns A short-lived auth token to be used in subsequent API calls.
+   */
   const authenticate = async (request: APIRequestContext): Promise<string> => {
     const response = await request.post(`${apiEndpoints.auth}`, {
       data: { username: testUser.username, password: testUser.password },
