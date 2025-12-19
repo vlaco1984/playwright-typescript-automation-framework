@@ -26,7 +26,7 @@ export class BookingService {
   /**
    * Create a new instance of `BookingService`.
    *
-   * @param apiRequest - Playwright API client used to make HTTP requests.
+   * @param apiRequest - Playwright API client used to make HTTP requests.gi
    * @param token - Auth token used for endpoints requiring authorization.
    */
   constructor(

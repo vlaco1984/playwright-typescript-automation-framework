@@ -1,8 +1,8 @@
 // Page Object Model for Registration UI
 import { Page, Locator } from '@playwright/test';
-import { ConsentModal } from '../components/consentModal';
+import { BasePage } from './base.page';
 
-export class RegisterPage {
+export class RegisterPage extends BasePage {
   private nameInput: string;
   private emailInput: string;
   private signupButton: string;
@@ -18,8 +18,8 @@ export class RegisterPage {
   private mobileNumberInput: string;
   private createAccountButton: string;
 
-  public consentModal: ConsentModal;
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.nameInput = 'input[data-qa="signup-name"]';
     this.emailInput = 'input[data-qa="signup-email"]';
     this.signupButton = 'button[data-qa="signup-button"]';
@@ -34,11 +34,10 @@ export class RegisterPage {
     this.zipcodeInput = 'input[data-qa="zipcode"]';
     this.mobileNumberInput = 'input[data-qa="mobile_number"]';
     this.createAccountButton = 'button[data-qa="create-account"]';
-    this.consentModal = new ConsentModal(this.page);
   }
   async goto() {
     await this.page.goto('/login');
-    await this.consentModal.close();
+    await this.closeConsent();
   }
   async register(name: string, email: string, password: string) {
     await this.page.locator(this.nameInput).waitFor({ state: 'visible' });

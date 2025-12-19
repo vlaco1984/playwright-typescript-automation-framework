@@ -1,24 +1,22 @@
 // Page Object Model for Products UI
 import { Page, Locator } from '@playwright/test';
-import { ConsentModal } from '../components/consentModal';
+import { BasePage } from './base.page';
 
-export class ProductsPage {
+export class ProductsPage extends BasePage {
   private productCard: Locator;
   private addToCartButton: Locator;
   private outOfStockAddToCartButton: Locator;
-  public consentModal: ConsentModal;
-
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.productCard = this.page.locator('.features_items .single-products');
     this.addToCartButton = this.page.locator('.features_items .single-products .add-to-cart');
     this.outOfStockAddToCartButton = this.page.locator(
       '.product-card.out-of-stock button.add-to-cart',
     );
-    this.consentModal = new ConsentModal(this.page);
   }
   async goto() {
     await this.page.goto('/products');
-    await this.consentModal.close();
+    await this.closeConsent();
   }
   async addFirstProductToCart() {
     const firstCard = this.productCard.first();
