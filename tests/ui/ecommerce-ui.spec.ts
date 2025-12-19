@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/page.fixtures';
+import { test, expect } from '../../UI/fixtures/page.fixtures';
 
 test.describe('E2E Tests', () => {
   test('should register a new user via UI and verify via API', async ({

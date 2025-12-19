@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { BookingService } from '../../services/bookingService';
+import { BookingService } from '../../API/services/bookingService';
 import { buildBookingData } from '../../utils/helpers';
 import { testUser, apiEndpoints } from '../../config/test-data';
 import type { APIRequestContext } from '@playwright/test';
