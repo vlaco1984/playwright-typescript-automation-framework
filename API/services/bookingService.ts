@@ -1,5 +1,5 @@
 // Service layer for Booking API
-import { apiEndpoints } from '../../config/test-data';
+import { apiEndpoints } from '../test-data/test-data';
 import { APIRequestContext, APIResponse } from '@playwright/test';
 
 export interface BookingDates {

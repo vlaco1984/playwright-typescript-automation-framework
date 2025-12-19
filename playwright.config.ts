@@ -9,7 +9,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: '.',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -30,7 +30,7 @@ export default defineConfig({
   projects: [
     {
       name: 'API',
-      testMatch: /.*api\/.+\.spec\.ts$/,
+      testMatch: /API\/tests\/.+\.spec\.ts$/,
       use: {
         baseURL: 'https://restful-booker.herokuapp.com',
         ...devices['Desktop Chrome'],
@@ -38,7 +38,7 @@ export default defineConfig({
     },
     {
       name: 'UI',
-      testMatch: /.*ui\/.+\.spec\.ts$/,
+      testMatch: /UI\/tests\/.+\.spec\.ts$/,
       use: {
         baseURL: 'https://automationexercise.com',
         ...devices['Desktop Chrome'],
