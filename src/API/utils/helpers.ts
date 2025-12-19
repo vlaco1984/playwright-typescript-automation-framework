@@ -1,3 +1,11 @@
+/**
+ * Build a valid Booking API payload with sensible defaults.
+ *
+ * Allows overriding any subset of fields to tailor data per test case.
+ *
+ * @param overrides - Partial booking fields to override default values.
+ * @returns Complete booking data object ready to be sent to the API.
+ */
 export function buildBookingData(
   overrides: Partial<{
     firstname: string;

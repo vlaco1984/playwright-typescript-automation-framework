@@ -1,23 +1,21 @@
 // Page Object Model for Login UI
 import { Page, Locator } from '@playwright/test';
-import { ConsentModal } from '../components/consentModal';
+import { BasePage } from './base.page';
 
-export class LoginPage {
+export class LoginPage extends BasePage {
   private usernameInput: Locator;
   private passwordInput: Locator;
   private submitButton: Locator;
-  public consentModal: ConsentModal;
-
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.usernameInput = this.page.locator('input[data-qa="login-email"]');
     this.passwordInput = this.page.locator('input[data-qa="login-password"]');
     this.submitButton = this.page.locator('button[data-qa="login-button"]');
-    this.consentModal = new ConsentModal(this.page);
   }
 
   async goto() {
     await this.page.goto('/login');
-    await this.consentModal.close();
+    await this.closeConsent();
   }
 
   async login(username: string, password: string) {

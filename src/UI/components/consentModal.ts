@@ -11,8 +11,3 @@ export class ConsentModal {
     }
   }
 }
-
-export async function closeConsentModal(page: Page): Promise<void> {
-  const modal = new ConsentModal(page);
-  await modal.close();
-}
