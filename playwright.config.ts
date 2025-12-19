@@ -30,7 +30,7 @@ export default defineConfig({
   projects: [
     {
       name: 'API',
-      testMatch: /API\/tests\/.+\.spec\.ts$/,
+      testMatch: /src\/API\/tests\/.+\.spec\.ts$/,
       use: {
         baseURL: 'https://restful-booker.herokuapp.com',
         ...devices['Desktop Chrome'],
@@ -38,7 +38,7 @@ export default defineConfig({
     },
     {
       name: 'UI',
-      testMatch: /UI\/tests\/.+\.spec\.ts$/,
+      testMatch: /src\/UI\/tests\/.+\.spec\.ts$/,
       use: {
         baseURL: 'https://automationexercise.com',
         ...devices['Desktop Chrome'],
